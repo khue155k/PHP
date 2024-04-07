@@ -1,1 +1,10 @@
-PHP
+## Xây dựng ứng dụng giúp sinh viên đăng ký tham quan doanh nghiệp bằng PHP
+
+## Sử dụng mô hình MVC
+
+## Khi cài đặt xuống thì
+
+```sh
+    cd school_bussiness_tour_management
+    npm install
+```
