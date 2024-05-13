@@ -17,8 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user = $db->select($sql);
             if ($user) 
             {
+                $row = $user->fetch_assoc();
                 $_SESSION["username"] = $username;
-                switch ($user["role"]) {
+                switch ($row["role"]) {
                     case 'Tài khoản sinh viên':
                         header("Location: controllers/HomeController.php");
                         break;

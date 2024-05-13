@@ -7,7 +7,7 @@
 
 <body>
     <h1>
-        Welcome <?php echo $_SESSION['username'] ?>
+        Welcome <?php session_start(); echo $_SESSION['username'] ?>
     </h1>
 
 </body>
