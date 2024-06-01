@@ -27,10 +27,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         header("Location: controllers/HomeController.php");
                         break;
                     case 'Toàn quyền hệ thống':
-                        header("Location: controllers/HomeController.php");
+                        header("Location: controllers/AdminController.php");
                         break;
                     case 'Quản lý thông thường':
-                        header("Location: controllers/HomeController.php");
+                        header("Location: controllers/AdminController.php");
                         break;
                     default:
                         header("Location: controllers/LoginController.php");
