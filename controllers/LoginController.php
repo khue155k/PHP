@@ -1,8 +1,6 @@
 <?php
 $usernameErrorMessage = '';
 $passwordErrorMessage = '';
-$errorMessage='';
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if(isset($_POST['username']) && isset($_POST['password'])){
         $username = $_POST['username'];
@@ -14,10 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $passwordErrorMessage = 'Vui lòng nhập mật khẩu';
         } else {
             $sql = "SELECT * FROM account WHERE username = '$username' AND password = '$password'";
-            $user = $db->select($sql);
+            $user = mysqli_query($conn, $sql);
             if ($user) 
             {
-                $row = $user->fetch_assoc();
+                $row = mysqli_fetch_assoc($user);
                 $_SESSION["username"] = $username;
                 switch ($row["role"]) {
                     case 'Tài khoản sinh viên':
@@ -27,9 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         header("Location: controllers/HomeController.php");
                         break;
                     case 'Toàn quyền hệ thống':
+                        $_SESSION['checkRegularAmin'] = false;;
                         header("Location: controllers/AdminController.php");
                         break;
                     case 'Quản lý thông thường':
+                        $_SESSION['checkRegularAmin'] = true;
                         header("Location: controllers/AdminController.php");
                         break;
                     default:
@@ -37,10 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         break;
                 }
             } else {
-                $errorMessage = "Tên đăng nhập hoặc mật khẩu sai";
+                echo "<script>";
+                echo "alert('Vui lòng nhập user hoặc password')";
+                echo "</script>";
             }
         }
     }
-    
 }
-require_once('views/pages/login.php');
+include_once __DIR__ . '/../views/pages/login.php';
+    

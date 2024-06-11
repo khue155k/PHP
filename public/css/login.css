@@ -1,3 +1,8 @@
+.flex-center{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
 .auth{
     height: 100vh;
 }
