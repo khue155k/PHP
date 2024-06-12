@@ -30,3 +30,30 @@ body{
 .h1-title{
     font-size: 28px !important;
 }
+.pad-12-0{
+    padding: 12px 0;
+}
+.mt-12{
+    margin-top: 12px;
+}
+.update, .delete{
+    padding: 4px 12px;
+    background-color: #ffc107;
+    border-radius: 2px;
+    border: none;
+    font-size: 14px;
+}
+
+.delete{
+    color: #fff;
+    background-color: #dc3545;
+    margin-left: 8px;
+}
+.delete-link {
+    color: #fff !important;
+    text-decoration: none !important;
+}
+.update-link {
+    color: #000 !important;
+    text-decoration: none !important;
+}

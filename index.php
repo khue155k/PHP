@@ -59,6 +59,7 @@ session_start();
                 break;
             }
         }
+        mysqli_close($conn);
     ?>
     <script src="/PHP_Nhom3/node_modules/bootstrap/dist/js/bootstrap.js"></script>
 
