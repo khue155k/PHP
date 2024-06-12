@@ -7,6 +7,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/PHP_Nhom3/public/css/base.css">
     <link rel="stylesheet" href="/PHP_Nhom3/node_modules/bootstrap/dist/css/bootstrap.css">
 </head>
 
@@ -27,6 +28,30 @@ session_start();
             }
             case 'HomeController' :{
                 require_once('controllers/HomeController.php');
+                break;
+            }
+            case 'TourController' :{
+                require_once('controllers/TourController.php');
+                break;
+            }
+            case 'ClassController' :{
+                require_once('controllers/ClassController.php');
+                break;
+            }
+            case 'StudentController' :{
+                require_once('controllers/StudentController.php');
+                break;
+            }
+            case 'TeacherController' :{
+                require_once('controllers/TeacherController.php');
+                break;
+            }
+            case 'CompanyController' :{
+                require_once('controllers/CompanyController.php');
+                break;
+            }
+            case 'AccountController' :{
+                require_once('controllers/AccountController.php');
                 break;
             }
             default:{
