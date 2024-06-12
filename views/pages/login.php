@@ -3,23 +3,19 @@
 
 <head>
     <title>Login</title>
-    <link rel="stylesheet" href="public/css/login.css">
+    <link rel="stylesheet" href="/PHP_Nhom3/public/css/login.css">
 </head>
 
 <body>
     <?php
-        require_once('controllers/LoginController.php');
-        if($errorMessage)
-        {
-            echo "<div class='alert alert-warning' role='alert'>". $errorMessage . "</div>";
-        }
+        include_once __DIR__ . '/../../controllers/LoginController.php';    
     ?>
     <div class="auth flex-center">
         <div class="auth-container flex-center">
             <div class="auth-img">
-                <img src="public/images/bg-login.jpg" alt="login image">
+                <img src="/PHP_Nhom3/public/images/bg-login.jpg" alt="login image">
             </div>
-            <form action="" method="POST" class="auth-form" novalidate>
+            <form method="POST" class="auth-form" novalidate>
                 <h3>Đăng nhập</h3>
                 <div class="mb-3 row">
                     <label for="username" class="col-form-label">Tên đăng nhập<span>*</span> </label>
@@ -27,7 +23,6 @@
                         <input type="text" class="form-control" id="username" name="username">
                     </div>
                     <?php
-                        require_once('controllers/LoginController.php');
                         if($usernameErrorMessage)
                         {
                             echo "<span class='error'>". $usernameErrorMessage . "</span>";
@@ -40,7 +35,6 @@
                         <input type="password" class="form-control" id="password" name="password">
                     </div>
                     <?php
-                        require_once('controllers/LoginController.php');
                         if($passwordErrorMessage)
                         {
                             echo "<span class='error'>". $passwordErrorMessage . "</span>";
