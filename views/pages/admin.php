@@ -7,13 +7,17 @@
 </head>
 
 <body>
-    <div class='admin-home'>
+    <div class='admin-home flex-sb'>
         <div class="admin-home-left">
             <?php
                 include __DIR__ . '/../components/sidebarAdmin.php';
             ?>
         </div>
-        <div class="admin-home-right"></div>
+        <div class="admin-home-right flex-grow-1">
+            <?php
+                include __DIR__ . '/../components/header.php';
+            ?>
+        </div>
     </div>
 </body>
 
