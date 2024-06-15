@@ -1,0 +1,15 @@
+*{
+    margin: 0;
+    bottom: 0;
+    box-sizing: border-box;
+}
+.admin-home{
+    display: flex;
+    justify-content: space-between;
+}
+.admin-home-left{
+    width: 16%;
+}
+.admin-home-right{
+    flex-grow: 1;
+}

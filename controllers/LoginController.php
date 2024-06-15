@@ -1,8 +1,6 @@
 <?php
 $usernameErrorMessage = '';
 $passwordErrorMessage = '';
-$errorMessage='';
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if(isset($_POST['username']) && isset($_POST['password'])){
         $username = $_POST['username'];
@@ -14,33 +12,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $passwordErrorMessage = 'Vui lòng nhập mật khẩu';
         } else {
             $sql = "SELECT * FROM account WHERE username = '$username' AND password = '$password'";
-            $user = $db->select($sql);
+            $user = mysqli_query($conn, $sql);
             if ($user) 
             {
-                $row = $user->fetch_assoc();
+                $row = mysqli_fetch_assoc($user);
                 $_SESSION["username"] = $username;
                 switch ($row["role"]) {
                     case 'Tài khoản sinh viên':
-                        header("Location: controllers/HomeController.php");
+                        header("Location: /PHP_Nhom3/index.php?controller=HomeController");
                         break;
                     case 'Tài khoản giáo viên':
-                        header("Location: controllers/HomeController.php");
+                        header("Location: /PHP_Nhom3/index.php?controller=HomeController");
                         break;
                     case 'Toàn quyền hệ thống':
-                        header("Location: controllers/HomeController.php");
+                        $_SESSION['checkRegularAmin'] = false;;
+                        header("Location: /PHP_Nhom3/index.php?controller=AdminController");
                         break;
                     case 'Quản lý thông thường':
-                        header("Location: controllers/HomeController.php");
+                        $_SESSION['checkRegularAmin'] = true;
+                        header("Location: /PHP_Nhom3/index.php?controller=AdminController");
                         break;
                     default:
-                        header("Location: controllers/LoginController.php");
+                        header("Location: c/PHP_Nhom3/index.php?controller=LoginController");
                         break;
                 }
             } else {
-                $errorMessage = "Tên đăng nhập hoặc mật khẩu sai";
+                echo "<script>";
+                echo "alert('Vui lòng nhập user hoặc password')";
+                echo "</script>";
             }
         }
     }
-    
 }
-require_once('views/pages/login.php');
+include_once __DIR__ . '/../views/pages/login.php';
+    
