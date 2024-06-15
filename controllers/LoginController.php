@@ -19,21 +19,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION["username"] = $username;
                 switch ($row["role"]) {
                     case 'Tài khoản sinh viên':
-                        header("Location: controllers/HomeController.php");
+                        header("Location: /PHP_Nhom3/index.php?controller=HomeController");
                         break;
                     case 'Tài khoản giáo viên':
-                        header("Location: controllers/HomeController.php");
+                        header("Location: /PHP_Nhom3/index.php?controller=HomeController");
                         break;
                     case 'Toàn quyền hệ thống':
                         $_SESSION['checkRegularAmin'] = false;;
-                        header("Location: controllers/AdminController.php");
+                        header("Location: /PHP_Nhom3/index.php?controller=AdminController");
                         break;
                     case 'Quản lý thông thường':
                         $_SESSION['checkRegularAmin'] = true;
-                        header("Location: controllers/AdminController.php");
+                        header("Location: /PHP_Nhom3/index.php?controller=AdminController");
                         break;
                     default:
-                        header("Location: controllers/LoginController.php");
+                        header("Location: c/PHP_Nhom3/index.php?controller=LoginController");
                         break;
                 }
             } else {
