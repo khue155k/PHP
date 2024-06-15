@@ -44,7 +44,6 @@
                                     <div class="mb-3">
                                         <label for="code" class="col-form-label">Mã sinh viên:</label>
                                         <input type="text" class="form-control" name="code">
-                                        <?php echo $codeErr ?>
                                     </div>
                                     <div class="mb-3">
                                         <label for="fullName" class="col-form-label">Họ tên:</label>
