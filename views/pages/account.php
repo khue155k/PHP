@@ -6,18 +6,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Quản trị tài khoản</title>
         <style>
-
+            .hiddenId{
+                display: none;
+            }
         </style>
     </head>
 
     <body>
-        <script>
-         function loadAccount(accountID) {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', '/PHP_Nhom3/controllers/AccountController.php?id=' + accountID, true);
-            xhr.send();
-        }
-        </script>
         <?php
             include_once __DIR__ . '/../../controllers/AccountController.php';  
         ?>
@@ -37,6 +32,8 @@
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#createAccount">Tạo tài khoản</button>
                     </div>
+
+                    <!-- modal create -->
                     <div class="modal fade" id="createAccount" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
@@ -70,7 +67,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Hủy</button>
-                                            <button type="submit" class="btn btn-primary">Tạo tài khoản</button>
+                                            <button type="submit" class="btn btn-primary" name="createAccount">Tạo tài khoản</button>
                                         </div>
                                     </form>
                                 </div>
@@ -97,12 +94,13 @@
                                             while ($row = mysqli_fetch_assoc($dataAcounts)) {
                                                 $i += 1;
                                                 echo "<tr>";
-                                                echo "<th scope='row'>". $i ."</th>"; 
+                                                echo "<th scope='row'>". $i ."</th>";
+                                                echo "<td class='hiddenId'>" . $row['accountID'] . "</td>"; 
                                                 echo "<td>" . $row['username'] . "</td>"; 
                                                 echo "<td>" . $row['password'] . "</td>"; 
                                                 echo "<td>" . $row['role'] . "</td>"; 
-                                                echo "<td><button class='update' data-bs-toggle='modal' data-bs-target='#updateAccount' onclick='loadAccount(\"".$row['accountID']."\")'>Sửa</button>
-                                                    <button class='delete'><a class='delete-link' onclick='(e) => e.preventDefault();' href='/PHP_Nhom3/index.php?controller=AccountController&deleteAccountId=".$row['accountID']."'>Xóa</a></button></td>";
+                                                echo "<td><button class='update update-account'>Sửa</button>
+                                                    <button class='delete deleteAccount'>Xóa</button></td>";
                                                 echo "</tr>";
                                             }
                                         }else{
@@ -118,6 +116,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- modal update -->
         <div class="modal fade" id="updateAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -128,46 +128,96 @@
                         </div>
                         <br>
                         <form method="POST">
+                            <input type="hidden" name="accountID" id="accountID">
                             <div class="mb-3">
                                 <label for="name" class="col-form-label">Tên đăng nhập:</label>
-                                <input type="text" class="form-control" name="name"
-                                    value="<?php echo isset($rowUpdate['username']) ? $rowUpdate['username'] : '' ?>">
+                                <input type="text" class="form-control" name="name" id="name">
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="col-form-label">Mật khẩu:</label>
-                                <input type="text" class="form-control" name="password"
-                                    value="<?php echo isset($rowUpdate['password']) ? $rowUpdate['password'] : '' ?>">
+                                <input type="text" class="form-control" name="password" id="password">
                             </div>
                             <div class="mb-3">
                                 <label for="role" class="col-form-label">Vai trò:</label>
-                                <select class="form-control form-select" name="role">
-                                    <option value="Quản lý thông thường"
-                                        <?php echo isset($rowUpdate['role']) && $rowUpdate['role'] == "Quản lý thông thường" ? 'selected' : '' ?>>
-                                        Quản lý thông thường</option>
-                                    <option value="Toàn quyền hệ thống"
-                                        <?php echo isset($rowUpdate['role']) && $rowUpdate['role'] == "Toàn quyền hệ thống" ? 'selected' : '' ?>>
-                                        Toàn quyền hệ thống</option>
-                                    <option value="Tài khoản sinh viên"
-                                        <?php echo isset($rowUpdate['role']) && $rowUpdate['role'] == "Tài khoản sinh viên" ? 'selected' : '' ?>>
-                                        Tài khoản sinh viên</option>
-                                    <option value="Tài khoản giáo viên"
-                                        <?php echo isset($rowUpdate['role']) && $rowUpdate['role'] == "Tài khoản giáo viên" ? 'selected' : '' ?>>
-                                        Tài khoản giáo viên</option>
+                                <select class="form-control form-select" name="role" id="role">
+                                    <option value="Quản lý thông thường">Quản lý thông thường</option>
+                                    <option value="Toàn quyền hệ thống">Toàn quyền hệ thống</option>
+                                    <option value="Tài khoản sinh viên">Tài khoản sinh viên</option>
+                                    <option value="Tài khoản giáo viên">Tài khoản giáo viên</option>
                                 </select>
                             </div>
                             <br>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                                <button type="submit" class="btn btn-primary">Cập nhập</button>
+                                <button type="submit" class="btn btn-primary" name="updateAccount">Cập nhập</button>
                             </div>
                         </form>
                     </div>
                 </div>
-
             </div>
         </div>
+
+        <!-- modal delete -->
+        <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa tài khoản</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div> <br>
+                    Bạn có chắc chắn muốn xóa tài khoản này?
+                    <br> <br>
+                    <form method="POST">
+                        <input type="hidden" name="deleteID" id="deleteID">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-danger">Xóa tài khoản</button>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- modal thông báo -->
+        <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notificationModalLabel">Thông báo</h5>
+                </div>
+                <div class="modal-body" id="modalMessage">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    <script>
+        $(document).ready(function () {
+            $('.update-account').on('click', function() {
+                $('#updateAccount').modal('show');
+                $tr = $(this).closest('tr');
+                let data = $tr.children("td").map(function() {
+                    return $(this).text();
+                }).get();
+                $('#accountID').val(data[0]);
+                $('#name').val(data[1]);
+                $('#password').val(data[2]);
+                $('#role').val(data[3]);
+            });
+            $('.deleteAccount').on('click', function() {
+                $('#deleteAccountModal').modal('show');
+                $tr = $(this).closest('tr');
+                let data = $tr.children("td").map(function() {
+                    return $(this).text();
+                }).get();
+                console.log(data);
+                $('#deleteID').val(data[0]);
+            });
+        });
+    </script>
     </body>
-
-
-
-    </html>
+</html>

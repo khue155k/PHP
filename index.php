@@ -12,45 +12,48 @@ session_start();
 </head>
 
 <body>
+    <script src="/PHP_Nhom3/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/PHP_Nhom3/node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="/PHP_Nhom3/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <?php
         include_once 'models/connect.php';
         $controller = isset($_GET['controller']) ? $_GET['controller'] : 'LoginController';
 
         switch($controller){
             case 'LogoutController':
-            case 'LoginController' :{
+            case 'LoginController':{
                 require_once('controllers/LoginController.php');
                 break;
             }
-            case 'AdminController' :{
+            case 'AdminController':{
                 require_once('controllers/AdminController.php');
                 break;
             }
-            case 'HomeController' :{
+            case 'HomeController':{
                 require_once('controllers/HomeController.php');
                 break;
             }
-            case 'TourController' :{
+            case 'TourController':{
                 require_once('controllers/TourController.php');
                 break;
             }
-            case 'ClassController' :{
+            case 'ClassController':{
                 require_once('controllers/ClassController.php');
                 break;
             }
-            case 'StudentController' :{
+            case 'StudentController':{
                 require_once('controllers/StudentController.php');
                 break;
             }
-            case 'TeacherController' :{
+            case 'TeacherController':{
                 require_once('controllers/TeacherController.php');
                 break;
             }
-            case 'CompanyController' :{
+            case 'CompanyController':{
                 require_once('controllers/CompanyController.php');
                 break;
             }
-            case 'AccountController' :{
+            case 'AccountController':{
                 require_once('controllers/AccountController.php');
                 break;
             }
@@ -61,8 +64,6 @@ session_start();
         }
         mysqli_close($conn);
     ?>
-    <script src="/PHP_Nhom3/node_modules/bootstrap/dist/js/bootstrap.js"></script>
-
 </body>
 
 

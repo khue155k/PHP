@@ -21,6 +21,9 @@ body{
     display: flex;
     justify-content: space-between;
 }
+.hiddenId{
+    display: none !important;
+}
 .flex-grow-1 {
     flex-grow: 1;
 }
@@ -56,4 +59,5 @@ body{
 .update-link {
     color: #000 !important;
     text-decoration: none !important;
+    display: block;
 }
