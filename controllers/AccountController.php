@@ -1,6 +1,6 @@
 <?php
 // read
-$dataAcountsSql = "SELECT * FROM account"; 
+$dataAcountsSql = "SELECT * FROM account";
 $dataAcounts = mysqli_query($conn, $dataAcountsSql);
 
 // create
@@ -112,7 +112,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-
 // delete
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST["deleteID"])) {
@@ -159,4 +158,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 require_once __DIR__ . '/../views/pages/account.php';
-?>

@@ -1,13 +1,10 @@
 {
   "scripts": {
-    "format": "prettier --write './**/*.{js,json,php}'"
+    "format": "prettier --write './**/*.{js,json}' && php-cs-fixer fix ."
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",
     "jquery": "^3.7.1"
-  },
-  "devDependencies": {
-    "prettier": "^3.2.5"
   }
 }
