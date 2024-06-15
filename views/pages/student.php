@@ -11,10 +11,10 @@
 
 <body>
     <?php
-        include_once __DIR__ . '/../../controllers/StudentController.php';  
+    include_once __DIR__ . '/../../controllers/StudentController.php';
     ?>
     <div class='flex-sb student'>
-        
+
         <div class="student-left">
             <?php
             include __DIR__ . '/../components/sidebarAdmin.php';
@@ -27,7 +27,7 @@
             <div class="container pad-0-28">
                 <div class="flex-sb-center pad-20-0">
                     <h1 class="h1-title">Danh sách sinh viên</h1>
-                    <button type="button" class="btn btn-primary">Tạo sinh viên</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createStudent">Tạo sinh viên</button>
                 </div>
 
                 <!-- modal create -->
@@ -42,27 +42,47 @@
                                 <br>
                                 <form method="POST">
                                     <div class="mb-3">
-                                        <label for="name" class="col-form-label">Tên đăng nhập:</label>
-                                        <input type="text" class="form-control" name="name">
+                                        <label for="code" class="col-form-label">Mã sinh viên:</label>
+                                        <input type="text" class="form-control" name="code">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="password" class="col-form-label">Mật khẩu:</label>
-                                        <input type="text" class="form-control" name="password">
+                                        <label for="fullName" class="col-form-label">Họ tên:</label>
+                                        <input type="text" class="form-control" name="fullName">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="role" class="col-form-label">Vai trò:</label>
-                                        <select class="form-control form-select" name="role">
-                                            <option value="Quản lý thông thường">Quản lý thông thường</option>
-                                            <option value="Toàn quyền hệ thống">Toàn quyền hệ thống</option>
-                                            <option value="Sinh viên sinh viên">Sinh viên sinh viên</option>
-                                            <option value="Sinh viên giáo viên"> Sinh viên giáo viên</option>
+                                        <label for="birthDate" class="col-form-label">Ngày sinh:</label>
+                                        <input type="text" class="form-control" name="birthDate">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="address" class="col-form-label">Địa chỉ:</label>
+                                        <input type="text" class="form-control" name="address">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="phoneNumber" class="col-form-label">Điện thoại:</label>
+                                        <input type="text" class="form-control" name="phoneNumber">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="email" class="col-form-label">Email:</label>
+                                        <input type="text" class="form-control" name="email">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="classID" class="col-form-label">Lớp:</label>
+                                        <select class="form-control form-select" name="classID">
+                                            <?php
+                                            if (mysqli_num_rows($dataClass) > 0) {
+                                                while ($row = mysqli_fetch_assoc($dataClass)) {
+                                                    echo "<option value=" . $row['classID'] . ">" . $row['name'] . "</option>";
+                                                }
+                                            } else {
+                                                echo "Lỗi truy vấn: " . mysqli_error($conn);
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <br>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                                        <button type="submit" class="btn btn-primary" name="createStudent">Tạo tài
-                                            khoản</button>
+                                        <button type="submit" class="btn btn-primary" name="createStudent">Tạo sinh viên</button>
                                     </div>
                                 </form>
                             </div>
@@ -119,5 +139,135 @@
         </div>
     </div>
 
+    <!-- modal update -->
+    <div class="modal fade" id="updateStudent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Cập nhập sinh viên</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                    </div>
+                    <br>
+                    <form method="POST">
+                        <input type="hidden" name="studentID" id="studentID">
+                        <div class="mb-3">
+                            <label for="code" class="col-form-label">Mã sinh viên:</label>
+                            <input type="text" class="form-control" name="code" id="code">
+                        </div>
+                        <div class="mb-3">
+                            <label for="fullName" class="col-form-label">Họ tên:</label>
+                            <input type="text" class="form-control" name="fullName" id="fullName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="birthDate" class="col-form-label">Ngày sinh:</label>
+                            <input type="text" class="form-control" name="birthDate" id="birthDate">
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="col-form-label">Địa chỉ:</label>
+                            <input type="text" class="form-control" name="address" id="address">
+                        </div>
+                        <div class="mb-3">
+                            <label for="phoneNumber" class="col-form-label">Điện thoại:</label>
+                            <input type="text" class="form-control" name="phoneNumber" id="phoneNumber">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="col-form-label">Email:</label>
+                            <input type="text" class="form-control" name="email" id="email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="classID" class="col-form-label">Lớp:</label>
+                            <select class="form-control form-select" name="classID">
+                                <?php
+                                $dataClassSql = "SELECT classID,name FROM class";
+                                $dataClass = mysqli_query($conn, $dataClassSql);
+                                if (mysqli_num_rows($dataClass) > 0) {
+                                    while ($row = mysqli_fetch_assoc($dataClass)) {
+                                        echo "<option value=" . $row['classID'] . ">" . $row['name'] . "</option>";
+                                    }
+                                } else {
+                                    echo "Lỗi truy vấn: " . mysqli_error($conn);
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-primary" name="updateStudent">Cập nhập</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal delete -->
+    <div class="modal fade" id="deleteStudentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa sinh viên</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div> <br>
+                    Bạn có chắc chắn muốn xóa sinh viên này?
+                    <br> <br>
+                    <form method="POST">
+                        <input type="hidden" name="deleteID" id="deleteID">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                            <button type="submit" class="btn btn-danger">Xóa sinh viên</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal thông báo -->
+    <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="notificationModalLabel">Thông báo</h5>
+                </div>
+                <div class="modal-body" id="modalMessage">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('.update-student').on('click', function() {
+                $('#updateStudent').modal('show');
+                var $tr = $(this).closest('tr');
+                let data = $tr.children("td").map(function() {
+                    return $(this).text();
+                }).get();
+                console.log(data);
+                $('#studentID').val(data[0]);
+                $('#code').val(data[1]);
+                $('#fullName').val(data[2]);
+                $('#birthDate').val(data[3]);
+                $('#address').val(data[4]);
+                $('#phoneNumber').val(data[5]);
+                $('#email').val(data[6]);
+                $('#classID').val(data[7]);
+            });
+            $('.deleteStudent').on('click', function() {
+                $('#deleteStudentModal').modal('show');
+                $tr = $(this).closest('tr');
+                let data = $tr.children("td").map(function() {
+                    return $(this).text();
+                }).get();
+                $('#deleteID').val(data[0]);
+            });
+        });
+    </script>
 </body>
+
 </html>
