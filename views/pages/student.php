@@ -115,7 +115,9 @@
                                         echo "<td>" . $row['email'] . "</td>";
                                         echo "<td id='" . $row['classID'] . "'>" . $row['name'] . "</td>";
                                         echo "<td><button class='update update-student'>Sửa</button>
-                                                <button class='delete deleteStudent'>Xóa</button></td>";
+                                                <button class='delete deleteStudent'>Xóa</button>
+                                                <button class='showData'>Xem DS CTQ</button>
+                                                </td>";
                                         echo "</tr>";
                                     }
                                 } else {
