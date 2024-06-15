@@ -27,7 +27,7 @@
             <div class="container pad-0-28">
                 <div class="flex-sb-center pad-20-0">
                     <h1 class="h1-title">Danh sách sinh viên</h1>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createStudent">Tạo sinh viên</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createStudent">Thêm sinh viên</button>
                 </div>
 
                 <!-- modal create -->
@@ -36,7 +36,7 @@
                         <div class="modal-content">
                             <div class="modal-body">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tạo sinh viên</h1>
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm sinh viên</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <br>
@@ -44,6 +44,7 @@
                                     <div class="mb-3">
                                         <label for="code" class="col-form-label">Mã sinh viên:</label>
                                         <input type="text" class="form-control" name="code">
+                                        <?php echo $codeErr ?>
                                     </div>
                                     <div class="mb-3">
                                         <label for="fullName" class="col-form-label">Họ tên:</label>
@@ -68,21 +69,13 @@
                                     <div class="mb-3">
                                         <label for="classID" class="col-form-label">Lớp:</label>
                                         <select class="form-control form-select" name="classID">
-                                            <?php
-                                            if (mysqli_num_rows($dataClass) > 0) {
-                                                while ($row = mysqli_fetch_assoc($dataClass)) {
-                                                    echo "<option value=" . $row['classID'] . ">" . $row['name'] . "</option>";
-                                                }
-                                            } else {
-                                                echo "Lỗi truy vấn: " . mysqli_error($conn);
-                                            }
-                                            ?>
+                                            <?php echo $dataSelect ?>
                                         </select>
                                     </div>
                                     <br>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                                        <button type="submit" class="btn btn-primary" name="createStudent">Tạo sinh viên</button>
+                                        <button type="submit" class="btn btn-primary" name="createStudent">Thêm sinh viên</button>
                                     </div>
                                 </form>
                             </div>
@@ -120,7 +113,7 @@
                                         echo "<td>" . $row['address'] . "</td>";
                                         echo "<td>" . $row['phoneNumber'] . "</td>";
                                         echo "<td>" . $row['email'] . "</td>";
-                                        echo "<td>" . $row['name'] . "</td>";
+                                        echo "<td id='" . $row['classID'] . "'>" . $row['name'] . "</td>";
                                         echo "<td><button class='update update-student'>Sửa</button>
                                                 <button class='delete deleteStudent'>Xóa</button></td>";
                                         echo "</tr>";
@@ -145,7 +138,7 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Cập nhập sinh viên</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Cập nhật sinh viên</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
                     </div>
                     <br>
@@ -153,7 +146,7 @@
                         <input type="hidden" name="studentID" id="studentID">
                         <div class="mb-3">
                             <label for="code" class="col-form-label">Mã sinh viên:</label>
-                            <input type="text" class="form-control" name="code" id="code">
+                            <input type="text" class="form-control" name="code" id="code" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="fullName" class="col-form-label">Họ tên:</label>
@@ -177,24 +170,14 @@
                         </div>
                         <div class="mb-3">
                             <label for="classID" class="col-form-label">Lớp:</label>
-                            <select class="form-control form-select" name="classID">
-                                <?php
-                                $dataClassSql = "SELECT classID,name FROM class";
-                                $dataClass = mysqli_query($conn, $dataClassSql);
-                                if (mysqli_num_rows($dataClass) > 0) {
-                                    while ($row = mysqli_fetch_assoc($dataClass)) {
-                                        echo "<option value=" . $row['classID'] . ">" . $row['name'] . "</option>";
-                                    }
-                                } else {
-                                    echo "Lỗi truy vấn: " . mysqli_error($conn);
-                                }
-                                ?>
+                            <select class="form-control form-select" name="classID" id="classID">
+                                <?php echo $dataSelect ?>
                             </select>
                         </div>
                         <br>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                            <button type="submit" class="btn btn-primary" name="updateStudent">Cập nhập</button>
+                            <button type="submit" class="btn btn-primary" name="updateStudent">Cập nhật</button>
                         </div>
                     </form>
                 </div>
@@ -248,7 +231,6 @@
                 let data = $tr.children("td").map(function() {
                     return $(this).text();
                 }).get();
-                console.log(data);
                 $('#studentID').val(data[0]);
                 $('#code').val(data[1]);
                 $('#fullName').val(data[2]);
@@ -256,7 +238,8 @@
                 $('#address').val(data[4]);
                 $('#phoneNumber').val(data[5]);
                 $('#email').val(data[6]);
-                $('#classID').val(data[7]);
+                var classId = $(this).closest('tr').find('td[id]').attr('id');
+                $('#classID').val(classId);
             });
             $('.deleteStudent').on('click', function() {
                 $('#deleteStudentModal').modal('show');
@@ -269,5 +252,4 @@
         });
     </script>
 </body>
-
 </html>
