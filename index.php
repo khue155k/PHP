@@ -7,8 +7,8 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/PHP_Nhom3/public/css/base.css">
     <link rel="stylesheet" href="/PHP_Nhom3/node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/PHP_Nhom3/public/css/base.css">
 </head>
 
 <body>

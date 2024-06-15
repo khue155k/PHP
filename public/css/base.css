@@ -39,7 +39,7 @@ body{
 .mt-12{
     margin-top: 12px;
 }
-.update, .delete{
+.update, .delete, .showData{
     padding: 4px 12px;
     background-color: #ffc107;
     border-radius: 2px;
@@ -51,6 +51,7 @@ body{
     color: #fff;
     background-color: #dc3545;
     margin-left: 8px;
+    margin-right: 8px;
 }
 .delete-link {
     color: #fff !important;
@@ -60,4 +61,8 @@ body{
     color: #000 !important;
     text-decoration: none !important;
     display: block;
+}
+.showData{
+    background-color: #157347;
+    color: #fff;
 }

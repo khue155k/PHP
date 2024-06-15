@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <d class='flex-sb student'>
+    <div class='flex-sb student'>
         <div class="student-left">
             <?php
                 include __DIR__ . '/../components/sidebarAdmin.php';
@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-    </d iv>
+    </div>
 </body>
 
 

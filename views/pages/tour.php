@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <d class='flex-sb tour'>
+    <div class='flex-sb tour'>
         <div class="tour-left">
             <?php
                 include __DIR__ . '/../components/sidebarAdmin.php';
@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-    </d iv>
+    </div>
 </body>
 
 
