@@ -14,7 +14,17 @@ if (mysqli_num_rows($dataClass) > 0) {
 } else {
     $dataSelect = "Lỗi truy vấn: " . mysqli_error($conn);
 }
-$Err = 0;
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['showData'])) {
+        $studentID = $_POST["studentID"];
+
+        $dataStudentTourSql = "SELECT tour.code, name, description, startDate, availables, companyID, teacherID, presentator FROM student_tour
+                    LEFT JOIN tour on tour.tourID = student_tour.tourID 
+                    WHERE studentID = $studentID";
+        $dataStudentTour = mysqli_query($conn, $dataStudentTourSql);
+    }
+}
+
 // create
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['createStudent'])) {
