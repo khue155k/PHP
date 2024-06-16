@@ -70,6 +70,7 @@
                                         <label for="classID" class="col-form-label">Lớp:</label>
                                         <select class="form-control form-select" name="classID">
                                             <?php echo $dataSelect ?>
+                                            
                                         </select>
                                     </div>
                                     <br>
