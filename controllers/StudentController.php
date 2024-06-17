@@ -11,17 +11,26 @@ if (mysqli_num_rows($dataClass) > 0) {
     while ($row = mysqli_fetch_assoc($dataClass)) {
         $dataSelect .= "<option value=" . $row['classID'] . ">" . $row['name'] . "</option>";
     }
-} else {
-    $dataSelect = "Lỗi truy vấn: " . mysqli_error($conn);
 }
+$scriptShowData="";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['showData'])) {
         $studentID = $_POST["studentID"];
 
-        $dataStudentTourSql = "SELECT tour.code, name, description, startDate, availables, companyID, teacherID, presentator FROM student_tour
+        $dataStudentSql = "SELECT student.code, fullName, birthDate, address, phoneNumber, email, name FROM student 
+                           LEFT JOIN class on student.classID=class.classID
+                           WHERE studentID = $studentID";
+        $dataStudent = mysqli_query($conn, $dataStudentSql);
+
+        $dataStudentTourSql = "SELECT tour.code, tour.name, tour.description, startDate, availables, company.name AS companyName, teacher.fullName AS teacherName, presentator FROM student_tour
                     LEFT JOIN tour on tour.tourID = student_tour.tourID 
+                    INNER JOIN company on company.companyID = tour.companyID 
+                    INNER JOIN teacher on teacher.teacherID = tour.teacherID
                     WHERE studentID = $studentID";
         $dataStudentTour = mysqli_query($conn, $dataStudentTourSql);
+        $scriptShowData = "
+            document.getElementById('listStudents').hidden = true;
+            document.getElementById('showData').hidden = false;";
     }
 }
 

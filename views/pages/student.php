@@ -9,6 +9,7 @@
     </style>
 </head>
 
+
 <body>
     <?php
     include_once __DIR__ . '/../../controllers/StudentController.php';
@@ -113,7 +114,7 @@
                                         echo "<td>" . $row['phoneNumber'] . "</td>";
                                         echo "<td>" . $row['email'] . "</td>";
                                         echo "<td id='" . $row['classID'] . "'>" . $row['name'] . "</td>";
-                                        echo "<td><button class='update update-student'>Sửa</button>
+                                        echo "<td><button class='update updateStudent'>Sửa</button>
                                                 <button class='delete deleteStudent'>Xóa</button>
                                                 <form method='POST'>
                                                     <input type='hidden' name='studentID' value='" . $row['studentID'] . "'>
@@ -124,7 +125,7 @@
                                     }
                                 } else {
                                     echo "<tr>";
-                                    echo "<td colspan='5'> Lỗi truy vấn: " . mysqli_error($conn) . "</td>";
+                                    echo "<td colspan='9'>Không có sinh viên nào</td>";
                                     echo "</tr>";
                                 }
                                 ?>
@@ -141,6 +142,22 @@
 
                 <div class="container-body pad-12-0">
                     <div class="container-table">
+                        <?php
+                        if (isset($dataStudent)) {
+                            mysqli_num_rows($dataStudent);
+                            $row = mysqli_fetch_assoc($dataStudent);
+                            echo "
+                            <ul>
+                                <li>Mã sinh viên: <b>" . $row['code'] . "</b></li>
+                                <li>Họ tên: <b>" . $row['fullName'] . "</b></li>
+                                <li>Ngày sinh: <b>" . $row['birthDate'] . "</b></li>
+                                <li>Địa chỉ: <b>" . $row['address'] . "</b></li>
+                                <li>Điện thoại: <b>" . $row['phoneNumber'] . "</b></li>
+                                <li>Email: <b>" . $row['email'] . "</b></li>
+                                <li>Lớp: <b>" . $row['name'] . "</b></li>
+                            </ul>";
+                        }
+                        ?>
                         <table class="table table-borderless table-hover table-bordered">
                             <thead class="table-dark">
                                 <tr>
@@ -157,27 +174,28 @@
                             </thead>
                             <tbody>
                                 <?php
-                                if (mysqli_num_rows($dataStudentTour) > 0) {
-                                    $i = 0;
-                                    while ($row = mysqli_fetch_assoc($dataStudentTour)) {
-                                        $i += 1;
+                                if (isset($dataStudentTour)) {
+                                    if (mysqli_num_rows($dataStudentTour) > 0) {
+                                        $i = 0;
+                                        while ($row = mysqli_fetch_assoc($dataStudentTour)) {
+                                            $i += 1;
+                                            echo "<tr>";
+                                            echo "<th scope='row'>" . $i . "</th>";
+                                            echo "<td>" . $row['code'] . "</td>";
+                                            echo "<td>" . $row['name'] . "</td>";
+                                            echo "<td>" . $row['description'] . "</td>";
+                                            echo "<td>" . $row['startDate'] . "</td>";
+                                            echo "<td>" . $row['availables'] . "</td>";
+                                            echo "<td>" . $row['companyName'] . "</td>";
+                                            echo "<td>" . $row['teacherName'] . "</td>";
+                                            echo "<td>" . $row['presentator'] . "</td>";
+                                            echo "</tr>";
+                                        }
+                                    } else {
                                         echo "<tr>";
-                                        echo "<th scope='row'>" . $i . "</th>";
-                                        echo "<td>" . $row['code'] . "</td>";
-                                        echo "<td>" . $row['name'] . "</td>";
-                                        echo "<td>" . $row['description'] . "</td>";
-                                        echo "<td>" . $row['startDate'] . "</td>";
-                                        echo "<td>" . $row['availables'] . "</td>";
-                                        echo "<td>" . $row['companyID'] . "</td>";
-                                        echo "<td>" . $row['teacherID'] . "</td>";
-                                        echo "<td>" . $row['presentator'] . "</td>";
-                                        //echo "<td id='" . $row['classID'] . "'>" . $row['name'] . "</td>";
+                                        echo "<td colspan='9'> Sinh viên chưa tham gia chuyến tham quan nào</td>";
                                         echo "</tr>";
                                     }
-                                } else {
-                                    echo "<tr>";
-                                    echo "<td colspan='5'> Lỗi truy vấn: " . mysqli_error($conn) . $studentID . "</td>";
-                                    echo "</tr>";
                                 }
                                 ?>
                             </tbody>
@@ -189,7 +207,7 @@
     </div>
 
     <!-- modal update -->
-    <div class="modal fade" id="updateStudent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="updateStudentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
@@ -218,7 +236,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="phoneNumber" class="col-form-label">Điện thoại:</label>
-                            <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" required> 
+                            <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="col-form-label">Email:</label>
@@ -280,16 +298,15 @@
         </div>
     </div>
     <script>
+        <?php echo $scriptShowData ?>
         document.getElementById('showListStudents').addEventListener('click', function() {
             document.getElementById('listStudents').hidden = false;
             document.getElementById('showData').hidden = true;
         });
-        document.getElementById('listStudents').hidden = true;
-        document.getElementById('showData').hidden = false;
 
         $(document).ready(function() {
-            $('.update-student').on('click', function() {
-                $('#updateStudent').modal('show');
+            $('.updateStudent').on('click', function() {
+                $('#updateStudentModal').modal('show');
                 $tr = $(this).closest('tr');
                 let data = $tr.children("td").map(function() {
                     return $(this).text();
