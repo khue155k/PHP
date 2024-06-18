@@ -5,6 +5,27 @@ $dataClassesSql = "SELECT class.*, COUNT(student.studentID) AS numStudents
                   LEFT JOIN student ON class.classID = student.classID
                   GROUP BY class.classID";
 $dataClasses = mysqli_query($conn, $dataClassesSql);
+$scriptShowData="";
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['showData'])) {
+        $classIDShow = $_POST["classIDToShowStudents"];
+        echo "<script>console.log('". $classIDShow ."')</script>" ;
+        $dataClassSql = "SELECT class.*, COUNT(student.studentID) AS numStudents
+                  FROM class
+                  LEFT JOIN student ON class.classID = student.classID
+                  WHERE class.classID = $classIDShow
+                  GROUP BY class.classID";
+        $dataClass = mysqli_query($conn, $dataClassSql);    
+        $dataStudentSql = "SELECT code, fullName, birthDate, address, phoneNumber, email
+                           FROM student
+                           WHERE classID = $classIDShow";
+        $dataStudents = mysqli_query($conn, $dataStudentSql);
+        $scriptShowData = "
+            document.getElementById('listClass').hidden = true;
+            document.getElementById('showData').hidden = false;";
+    }
+}
+
 
 // create
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
