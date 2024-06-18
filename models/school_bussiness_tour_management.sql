@@ -117,8 +117,8 @@ INSERT INTO `class` (`classID`, `code`, `name`) VALUES
 (14, 'KHMT03', 'Khoa học máy tính 03'),
 (15, 'HTTT01', 'Hệ thống thông tin 01'),
 (16, 'HTTT02', 'Hệ thống thông tin 02'),
-(17, 'CNDPT01', 'Công nghệ đa phương tiện 01'),;
-(18, 'CNDPT02', 'Công nghệ đa phương tiện 02'),;
+(17, 'CNDPT01', 'Công nghệ đa phương tiện 01'),
+(18, 'CNDPT02', 'Công nghệ đa phương tiện 02');
 
 -- --------------------------------------------------------
 

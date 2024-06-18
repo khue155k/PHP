@@ -88,8 +88,8 @@
                                         echo "<tr>";
                                         echo "<th scope='row'>". $i ."</th>";
                                         echo "<td>" . $row['code'] . "</td>"; 
-                                        echo "<td>" . $row['name'] . "</td>"; 
-                                        echo "<td>" . $row['description'] . "</td>"; 
+                                        echo "<td class='w-25'>" . $row['name'] . "</td>"; 
+                                        echo "<td class='w-25'>" . $row['description'] . "</td>"; 
                                         echo "<td>" . $row['availables'] . "</td>";
                                         echo "<td>" . $row['companyName'] . "</td>";
                                         echo "<td>" . $row['teacherName'] . "</td>";
