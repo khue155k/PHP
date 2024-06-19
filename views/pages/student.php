@@ -114,11 +114,11 @@
                                         echo "<td>" . $row['phoneNumber'] . "</td>";
                                         echo "<td>" . $row['email'] . "</td>";
                                         echo "<td id='" . $row['classID'] . "'>" . $row['name'] . "</td>";
-                                        echo "<td><button class='update updateStudent'>Sửa</button>
-                                                <button class='delete deleteStudent'>Xóa</button>
+                                        echo "<td><button class='update updateStudent dp-block'>Sửa</button>
+                                                <button class='delete deleteStudent dp-block'>Xóa</button>
                                                 <form method='POST'>
                                                     <input type='hidden' name='studentID' value='" . $row['studentID'] . "'>
-                                                    <button type='submit' class='showData' name='showData'>Xem CTQ</button>
+                                                    <button type='submit' class='showData dp-block' name='showData'>Xem CTQ</button>
                                                 </form>
                                                 </td>";
                                         echo "</tr>";
@@ -140,14 +140,14 @@
                     <button type="button" class="btn btn-primary" id="showListStudents">Xem danh sách sinh viên</button>
                 </div>
 
-                <div class="container-body pad-12-0">
+                <div class="container-body">
                     <div class="container-table">
                         <?php
                         if (isset($dataStudent)) {
                             mysqli_num_rows($dataStudent);
                             $row = mysqli_fetch_assoc($dataStudent);
                             echo "
-                            <ul>
+                            <ul class='list-infor'>
                                 <li>Mã sinh viên: <b>" . $row['code'] . "</b></li>
                                 <li>Họ tên: <b>" . $row['fullName'] . "</b></li>
                                 <li>Ngày sinh: <b>" . $row['birthDate'] . "</b></li>
