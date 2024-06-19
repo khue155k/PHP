@@ -49,16 +49,16 @@
 
     .sidebar-nav li {
         transition: all 0.3s linear;
-        padding: 16px 24px;
     }
-
+    
     .sidebar-nav li svg {
         width: 20px;
         height: 20px;
         margin-right: 8px;
     }
-
+    
     .sidebar-nav li a {
+        padding: 16px 24px;
         display: flex;
         align-items: center;
         width: 100%;
