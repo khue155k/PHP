@@ -48,11 +48,11 @@
                                 <form method="POST">
                                     <div class="mb-3">
                                         <label for="name" class="col-form-label">Tên đăng nhập:</label>
-                                        <input type="text" class="form-control" name="name">
+                                        <input required type="text" class="form-control" name="name">
                                     </div>
                                     <div class="mb-3">
                                         <label for="password" class="col-form-label">Mật khẩu:</label>
-                                        <input type="text" class="form-control" name="password">
+                                        <input required type="text" class="form-control" name="password">
                                     </div>
                                     <div class="mb-3">
                                         <label for="role" class="col-form-label">Vai trò:</label>
@@ -129,14 +129,14 @@
                     </div>
                     <br>
                     <form method="POST">
-                        <input type="hidden" name="accountID" id="accountID">
+                        <input required type="hidden" name="accountID" id="accountID">
                         <div class="mb-3">
                             <label for="name" class="col-form-label">Tên đăng nhập:</label>
-                            <input type="text" class="form-control" name="name" id="name">
+                            <input required type="text" class="form-control" name="name" id="name">
                         </div>
                         <div class="mb-3">
                             <label for="password" class="col-form-label">Mật khẩu:</label>
-                            <input type="text" class="form-control" name="password" id="password">
+                            <input required type="text" class="form-control" name="password" id="password">
                         </div>
                         <div class="mb-3">
                             <label for="role" class="col-form-label">Vai trò:</label>
@@ -171,7 +171,7 @@
                     Bạn có chắc chắn muốn xóa tài khoản này?
                     <br> <br>
                     <form method="POST">
-                        <input type="hidden" name="deleteID" id="deleteID">
+                        <input required type="hidden" name="deleteID" id="deleteID">
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                             <button type="submit" class="btn btn-danger">Xóa tài khoản</button>

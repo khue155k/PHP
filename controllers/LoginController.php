@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($user) {
                     $row = mysqli_fetch_assoc($user);
                     $_SESSION["username"] = $username;
+                    $_SESSION["accountIdNow"] = $row['accountID'];
                     switch ($row["role"]) {
                         case 'Tài khoản sinh viên':
                             header("Location: /PHP_Nhom3/index.php?controller=HomeController");
