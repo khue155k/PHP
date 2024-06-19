@@ -139,24 +139,26 @@
                             </thead>
                             <tbody>
                                 <?php
-                                if (mysqli_num_rows($dataStudents) > 0) {
-                                    $i = 0;
-                                    while ($row = mysqli_fetch_assoc($dataStudents)) {
-                                        $i += 1;
+                                if (isset($dataStudents)){
+                                    if (mysqli_num_rows($dataStudents) > 0) {
+                                        $i = 0;
+                                        while ($row = mysqli_fetch_assoc($dataStudents)) {
+                                            $i += 1;
+                                            echo "<tr>";
+                                            echo "<th scope='row'>" . $i . "</th>";
+                                            echo "<td>" . $row['code'] . "</td>";
+                                            echo "<td>" . $row['fullName'] . "</td>";
+                                            echo "<td>" . $row['birthDate'] . "</td>";
+                                            echo "<td>" . $row['address'] . "</td>";
+                                            echo "<td>" . $row['phoneNumber'] . "</td>";
+                                            echo "<td>" . $row['email'] . "</td>";
+                                            echo "</tr>";
+                                        }
+                                    } else {
                                         echo "<tr>";
-                                        echo "<th scope='row'>" . $i . "</th>";
-                                        echo "<td>" . $row['code'] . "</td>";
-                                        echo "<td>" . $row['fullName'] . "</td>";
-                                        echo "<td>" . $row['birthDate'] . "</td>";
-                                        echo "<td>" . $row['address'] . "</td>";
-                                        echo "<td>" . $row['phoneNumber'] . "</td>";
-                                        echo "<td>" . $row['email'] . "</td>";
+                                        echo "<td colspan='6'>Không có sinh viên nào</td>";
                                         echo "</tr>";
                                     }
-                                } else {
-                                    echo "<tr>";
-                                    echo "<td colspan='6'>Không có sinh viên nào</td>";
-                                    echo "</tr>";
                                 }
                                 ?>
                             </tbody>
