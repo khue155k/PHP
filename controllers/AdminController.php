@@ -55,8 +55,9 @@ LEFT JOIN
 WHERE 
     (CASE 
         WHEN tour.startDate LIKE '%/%/%' THEN STR_TO_DATE(tour.startDate, '%d/%m/%Y')
-        ELSE tour.startDate
-    END) = CURDATE();
+        WHEN tour.startDate LIKE '%-%-%' THEN STR_TO_DATE(tour.startDate, '%Y-%m-%d')
+        ELSE NULL
+    END) = CURDATE() 
 ";
 
 $getTourNow = mysqli_query($conn, $getTourNowSql);

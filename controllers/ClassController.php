@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   WHERE class.classID = $classIDShow
                   GROUP BY class.classID";
         $dataClass = mysqli_query($conn, $dataClassSql);    
-        $dataStudentSql = "SELECT code, fullName, birthDate, address, phoneNumber, email
+        $dataStudentSql = "SELECT code, fullName, gender, birthDate, address, phoneNumber, email
                            FROM student
                            WHERE classID = $classIDShow";
         $dataStudents = mysqli_query($conn, $dataStudentSql);

@@ -51,6 +51,14 @@
                                         <input type="text" class="form-control" name="fullName" required>
                                     </div>
                                     <div class="mb-3">
+                                        <label for="role" class="col-form-label">Giới tính:</label>
+                                        <select class="form-control form-select" name="gender">
+                                            <option value="Nam">Nam</option>
+                                            <option value="Nữ">Nữ</option>
+                                            <option value="Khác">Khác</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
                                         <label for="birthDate" class="col-form-label">Ngày sinh:</label>
                                         <input type="text" class="form-control" name="birthDate" required>
                                     </div>
@@ -90,6 +98,7 @@
                                     <th scope="col">STT</th>
                                     <th scope="col">Mã sinh viên</th>
                                     <th scope="col">Họ tên</th>
+                                    <th scope="col">Giới tính</th>
                                     <th scope="col">Ngày sinh</th>
                                     <th scope="col">Địa chỉ</th>
                                     <th scope="col">Điện thoại</th>
@@ -109,6 +118,7 @@
                                         echo "<td class='hiddenId'>" . $row['studentID'] . "</td>";
                                         echo "<td>" . $row['code'] . "</td>";
                                         echo "<td>" . $row['fullName'] . "</td>";
+                                        echo "<td>" . $row['gender'] . "</td>";
                                         echo "<td>" . $row['birthDate'] . "</td>";
                                         echo "<td>" . $row['address'] . "</td>";
                                         echo "<td>" . $row['phoneNumber'] . "</td>";
@@ -125,7 +135,7 @@
                                     }
                                 } else {
                                     echo "<tr>";
-                                    echo "<td colspan='9'>Không có sinh viên nào</td>";
+                                    echo "<td colspan='10'>Không có sinh viên nào</td>";
                                     echo "</tr>";
                                 }
                                 ?>
@@ -150,6 +160,7 @@
                             <ul class='list-infor'>
                                 <li>Mã sinh viên: <b>" . $row['code'] . "</b></li>
                                 <li>Họ tên: <b>" . $row['fullName'] . "</b></li>
+                                <li>Giới tính: <b>" . $row['gender'] . "</b></li>
                                 <li>Ngày sinh: <b>" . $row['birthDate'] . "</b></li>
                                 <li>Địa chỉ: <b>" . $row['address'] . "</b></li>
                                 <li>Điện thoại: <b>" . $row['phoneNumber'] . "</b></li>
@@ -225,6 +236,14 @@
                         <div class="mb-3">
                             <label for="fullName" class="col-form-label">Họ tên:</label>
                             <input type="text" class="form-control" name="fullName" id="fullName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="role" class="col-form-label">Giới tính:</label>
+                            <select class="form-control form-select" name="gender" id="gender">
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                                <option value="Khác">Khác</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="birthDate" class="col-form-label">Ngày sinh:</label>
@@ -314,10 +333,11 @@
                 $('#studentID').val(data[0]);
                 $('#code').val(data[1]);
                 $('#fullName').val(data[2]);
-                $('#birthDate').val(data[3]);
-                $('#address').val(data[4]);
-                $('#phoneNumber').val(data[5]);
-                $('#email').val(data[6]);
+                $('#gender').val(data[3]);
+                $('#birthDate').val(data[4]);
+                $('#address').val(data[5]);
+                $('#phoneNumber').val(data[6]);
+                $('#email').val(data[7]);
                 var classId = $(this).closest('tr').find('td[id]').attr('id');
                 $('#classID').val(classId);
             });

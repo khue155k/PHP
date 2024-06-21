@@ -131,6 +131,7 @@
                                     <th scope="col">STT</th>
                                     <th scope="col">Mã sinh viên</th>
                                     <th scope="col">Họ tên</th>
+                                    <th scope="col">Giới tính</th>
                                     <th scope="col">Ngày sinh</th>
                                     <th scope="col">Địa chỉ</th>
                                     <th scope="col">Điện thoại</th>
@@ -148,6 +149,7 @@
                                             echo "<th scope='row'>" . $i . "</th>";
                                             echo "<td>" . $row['code'] . "</td>";
                                             echo "<td>" . $row['fullName'] . "</td>";
+                                            echo "<td>" . $row['gender'] . "</td>";
                                             echo "<td>" . $row['birthDate'] . "</td>";
                                             echo "<td>" . $row['address'] . "</td>";
                                             echo "<td>" . $row['phoneNumber'] . "</td>";
@@ -156,7 +158,7 @@
                                         }
                                     } else {
                                         echo "<tr>";
-                                        echo "<td colspan='6'>Không có sinh viên nào</td>";
+                                        echo "<td colspan='7'>Không có sinh viên nào</td>";
                                         echo "</tr>";
                                     }
                                 }
