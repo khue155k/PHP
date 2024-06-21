@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="password" class="col-form-label">Mật khẩu:</label>
-                                        <input required type="text" class="form-control" name="password">
+                                        <input required type="password" class="form-control" name="password">
                                     </div>
                                     <div class="mb-3">
                                         <label for="role" class="col-form-label">Vai trò:</label>
@@ -136,7 +136,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="password" class="col-form-label">Mật khẩu:</label>
-                            <input required type="text" class="form-control" name="password" id="password">
+                            <input required type="password" class="form-control" name="password" id="password">
                         </div>
                         <div class="mb-3">
                             <label for="role" class="col-form-label">Vai trò:</label>

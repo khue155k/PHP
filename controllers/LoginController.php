@@ -44,9 +44,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                 } 
             } else {
-                echo "<script>";
-                echo "alert('Sai tên đăng nhập hoặc mật khẩu')";
-                echo "</script>";
+                echo "<script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        document.getElementById('modalMessage').innerText = 'Tên đăng nhập hoặc mật khẩu không đúng';
+                        $('#notificationModal').modal('show');
+                    });
+                    </script>";
             }
         }
     }

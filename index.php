@@ -57,6 +57,10 @@ session_start();
                 require_once('controllers/AccountController.php');
                 break;
             }
+            case 'StudentChangePasswordController':{
+                require_once('controllers/StudentChangePasswordController.php');
+                break;
+            }
             default:{
                 require_once('controllers/LoginController.php');
                 break;
