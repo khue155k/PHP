@@ -1,6 +1,20 @@
 <?php
+//pagination
+$pagination = mysqli_query($conn, "SELECT COUNT(accountID) AS total FROM account");
+$row = mysqli_fetch_assoc($pagination);
+$total_records = $row['total'];
+
+$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+$limit = 10;
+$total_page = ceil($total_records / $limit);
+
+if ($current_page > $total_page) $current_page = $total_page;
+        else if ($current_page < 1) $current_page = 1;
+
+$start = ($current_page - 1) * $limit >=0 ? ($current_page - 1) * $limit : 0;
+
 // read
-$dataAcountsSql = "SELECT * FROM account";
+$dataAcountsSql = "SELECT * FROM account LIMIT $start, $limit";
 $dataAcounts = mysqli_query($conn, $dataAcountsSql);
 
 // create
