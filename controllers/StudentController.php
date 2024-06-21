@@ -1,7 +1,22 @@
 <?php
-// read
+//pagination
+$pagination = mysqli_query($conn, "SELECT COUNT(studentID) AS total FROM student");
+$row = mysqli_fetch_assoc($pagination);
+$total_records = $row['total'];
+
+$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+$limit = 10;
+$total_page = ceil($total_records / $limit);
+
+if ($current_page > $total_page) $current_page = $total_page;
+        else if ($current_page < 1) $current_page = 1;
+
+$start = ($current_page - 1) * $limit >=0 ? ($current_page - 1) * $limit : 0;
+
+//read
 $dataStudentsSql = "SELECT studentID, student.code, fullName, gender, birthDate, address, phoneNumber, email, student.classID, class.name FROM student 
-                    LEFT JOIN class on student.classID=class.classID";
+                    LEFT JOIN class on student.classID=class.classID
+                    LIMIT $start, $limit";
 $dataStudents = mysqli_query($conn, $dataStudentsSql);
 
 $dataClassSql = "SELECT classID,name FROM class";
@@ -12,7 +27,7 @@ if (mysqli_num_rows($dataClass) > 0) {
         $dataSelect .= "<option value=" . $row['classID'] . ">" . $row['name'] . "</option>";
     }
 }
-$scriptShowData="";
+$scriptShowData = "";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['showData'])) {
         $studentID = $_POST["studentID"];
@@ -27,7 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     INNER JOIN company on company.companyID = tour.companyID 
                     INNER JOIN teacher on teacher.teacherID = tour.teacherID
                     WHERE studentID = $studentID";
+
         $dataStudentTour = mysqli_query($conn, $dataStudentTourSql);
+
         $scriptShowData = "
             document.getElementById('listStudents').hidden = true;
             document.getElementById('showData').hidden = false;";
