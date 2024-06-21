@@ -112,9 +112,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $checkStudentSql = "SELECT * FROM student WHERE code = '$code'";
         $checkStudentResult = mysqli_query($conn, $checkStudentSql);
-        $createStudentSql = "UPDATE student SET fullName = '$fullName', gender = '$gender', birthDate = '$birthDate', address = '$address', phoneNumber = '$phoneNumber', email = '$email', classID = '$classID' 
+        $updateStudentSql = "UPDATE student SET fullName = '$fullName', gender = '$gender', birthDate = '$birthDate', address = '$address', phoneNumber = '$phoneNumber', email = '$email', classID = '$classID' 
                                 WHERE studentID = $studentID";
-        if (!mysqli_query($conn, $createStudentSql)) {
+        if (!mysqli_query($conn, $updateStudentSql)) {
             $errorMessage = mysqli_real_escape_string($conn, mysqli_error($conn));
             echo "<script>
                     document.addEventListener('DOMContentLoaded', function() {
