@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 17, 2024 lúc 08:20 PM
+-- Thời gian đã tạo: Th6 16, 2024 lúc 04:33 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -172,7 +172,7 @@ CREATE TABLE `student` (
   `studentID` int(11) NOT NULL,
   `code` varchar(100) NOT NULL,
   `fullName` varchar(100) NOT NULL,
-  `avatar` varchar(100) NOT NULL,
+  `gender` varchar(15) NOT NULL,
   `birthDate` varchar(100) NOT NULL,
   `address` varchar(100) NOT NULL,
   `phoneNumber` varchar(100) NOT NULL,
@@ -185,27 +185,27 @@ CREATE TABLE `student` (
 -- Đang đổ dữ liệu cho bảng `student`
 --
 
-INSERT INTO `student` (`studentID`, `code`, `fullName`, `avatar`, `birthDate`, `address`, `phoneNumber`, `email`, `classID`, `accountID`) VALUES
-(1, 'SV01', 'Tăng Khánh Linh', '', '22/12/2003', 'Hưng Yên', '0987654321', 'khanhlinh@haui.com', 1, 4),
-(2, 'SV02', 'Nguyễn Thị Trang', '', '12/10/2003', 'Hưng Yên', '0123456789', 'trang@gmail.com', 3, 7),
-(3, 'SV03', 'Lê Thị Ngọc Ánh', '', '11/10/2003', 'Thanh Hóa', '0125847369', 'anh@gmail.com', 4, 11),
-(4, 'SV04', 'Nguyễn Thị Trang', '', '12/10/2003', 'Hưng Yên', '0123654789', 'trang@gmail.com', 3, 10),
-(5, 'SV05', 'Đinh Tuấn Đạt', '', '1/1/2003', 'Hà Nội', '0147258369', 'dat@gmail.com', 1, 12),
-(6, 'SV06', 'Lương Minh Anh', '', '30/10/2003', 'Hà Nội', '036974125', 'anh@gmail.com', 1, 26),
-(7, 'SV07', 'Đinh Anh Minh', '', '16/10/2003', 'Hải Phòng', '0147963258', 'minh@gmail.com', 2, 27),
-(8, 'SV08', 'Hoàng Lan Hương', '', '16/10/2003', 'Hưng Yên', '0456789123', 'huong@gmail.com', 3, 28),
-(9, 'SV09', 'Giang SeoChinh', '', '16/10/2003', 'Hà Nam', '0147258369', 'hoang@gmail.com', 5, 29),
-(10, 'SV10', 'Hoàng Văn Sơn', '', '16/10/2003', 'Tây Nguyên', '0258796413', 'son@gmail.com', 6, 30),
-(11, 'SV11', 'Dương Văn Vũ', '', '19/2/2003', 'Quảng Ninh', '0789654123', 'vu@gmail.com', 7, 31),
-(12, 'SV12', 'Nguyễn Thị Thương', '', '16/4/2003', 'Huế', '0147863259', 'thuong@gmail.com', 8, 32),
-(13, 'SV13', 'Nguyễn Thị Hạnh', '', '16/09/2003', 'Thành Phố HCM', '0569874123', 'hanh@gmail.com', 2, 33),
-(14, 'SV14', 'Nguyễn Vương Quyến', '', '20/1/2003', 'Lạng Sơn', '0258741369', 'quyen@gmail.com', 3, 34),
-(15, 'SV15', 'Đặng Gia Bảo', '', '16/0/2003', 'Thanh Hóa', '0258741369', 'bao@gmail.com', 4, 35),
-(16, 'SV16', 'Hạ Quang Anh', '', '12/03/2003', 'Tuyên Quang', '0258741369', 'anh@gmail.com', 5, 36),
-(17, 'SV17', 'Lê Anh Hùng', '', '12/04/2003', 'Hải Dương', '0236987451', 'hung@gmail.com', 6, 37),
-(18, 'SV18', 'Cao Đặng Trí', '', '25/09/2003', 'Hà Nội', '0258741369', 'tri@gmail.com', 7, 38),
-(19, 'SV19', 'Phương Quỳnh Anh', '', '26/01/2003', 'Hà Nam', '0258749632', 'qanh@gmail.com', 8, 39),
-(20, 'SV20', 'Cao Hoàng Đức', '', '30/8/2003', 'Hải Phòng', '0147852369', 'hduc@gmail.com', 7, 40);
+INSERT INTO `student` (`studentID`, `code`, `fullName`, `gender`, `birthDate`, `address`, `phoneNumber`, `email`, `classID`, `accountID`) VALUES
+(1, 'SV01', 'Tăng Khánh Linh', 'Nữ', '22/12/2003', 'Hưng Yên', '0987654321', 'khanhlinh@haui.com', 1, 4),
+(2, 'SV02', 'Trương Ngọc Khuê', 'Nam', '15/05/2003', 'Hà Nam', '0123456789', 'khue@gmail.com', 8, 7),
+(3, 'SV03', 'Lê Thị Ngọc Ánh', 'Nữ', '11/10/2003', 'Thanh Hóa', '0125847369', 'anh@gmail.com', 4, 11),
+(4, 'SV04', 'Nguyễn Thị Trang', 'Nữ', '12/10/2003', 'Hưng Yên', '0123654789', 'trang@gmail.com', 3, 10),
+(5, 'SV05', 'Đinh Tuấn Đạt', 'Nam', '1/1/2003', 'Hà Nội', '0147258369', 'dat@gmail.com', 1, 12),
+(6, 'SV06', 'Lương Minh Anh', 'Nữ', '30/10/2003', 'Hà Nội', '036974125', 'anh@gmail.com', 1, 26),
+(7, 'SV07', 'Đinh Anh Minh', 'Nam', '16/10/2003', 'Hải Phòng', '0147963258', 'minh@gmail.com', 2, 27),
+(8, 'SV08', 'Hoàng Lan Hương', 'Nữ', '16/10/2003', 'Hưng Yên', '0456789123', 'huong@gmail.com', 3, 28),
+(9, 'SV09', 'Giang SeoChinh', 'Nam', '16/10/2003', 'Hà Nam', '0147258369', 'hoang@gmail.com', 5, 29),
+(10, 'SV10', 'Hoàng Văn Sơn', 'Nam', '16/10/2003', 'Tây Nguyên', '0258796413', 'son@gmail.com', 6, 30),
+(11, 'SV11', 'Dương Văn Vũ', 'Nam', '19/2/2003', 'Quảng Ninh', '0789654123', 'vu@gmail.com', 7, 31),
+(12, 'SV12', 'Nguyễn Thị Thương', 'Nữ', '16/4/2003', 'Huế', '0147863259', 'thuong@gmail.com', 8, 32),
+(13, 'SV13', 'Nguyễn Thị Hạnh', 'Nữ', '16/09/2003', 'Thành Phố HCM', '0569874123', 'hanh@gmail.com', 2, 33),
+(14, 'SV14', 'Nguyễn Vương Quyến', 'Nam', '20/1/2003', 'Lạng Sơn', '0258741369', 'quyen@gmail.com', 3, 34),
+(15, 'SV15', 'Đặng Gia Bảo', 'Nam', '16/0/2003', 'Thanh Hóa', '0258741369', 'bao@gmail.com', 4, 35),
+(16, 'SV16', 'Hạ Quang Anh', 'Nam', '12/03/2003', 'Tuyên Quang', '0258741369', 'anh@gmail.com', 5, 36),
+(17, 'SV17', 'Lê Anh Hùng', 'Nam', '12/04/2003', 'Hải Dương', '0236987451', 'hung@gmail.com', 6, 37),
+(18, 'SV18', 'Cao Đặng Trí', 'Nam', '25/09/2003', 'Hà Nội', '0258741369', 'tri@gmail.com', 7, 38),
+(19, 'SV19', 'Phương Quỳnh Anh', 'Nữ', '26/01/2003', 'Hà Nam', '0258749632', 'qanh@gmail.com', 8, 39),
+(20, 'SV20', 'Cao Hoàng Đức', 'Nam', '30/8/2003', 'Hải Phòng', '0147852369', 'hduc@gmail.com', 7, 40);
 
 -- --------------------------------------------------------
 
@@ -591,7 +591,7 @@ ALTER TABLE `account`
 -- AUTO_INCREMENT cho bảng `class`
 --
 ALTER TABLE `class`
-  MODIFY `classID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `classID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT cho bảng `company`
@@ -603,7 +603,7 @@ ALTER TABLE `company`
 -- AUTO_INCREMENT cho bảng `student`
 --
 ALTER TABLE `student`
-  MODIFY `studentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `studentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT cho bảng `teacher`
