@@ -1,9 +1,24 @@
 <?php
+//pagination
+$pagination = mysqli_query($conn, "SELECT COUNT(classID) AS total FROM class");
+$row = mysqli_fetch_assoc($pagination);
+$total_records = $row['total'];
+
+$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+$limit = 10;
+$total_page = ceil($total_records / $limit);
+
+if ($current_page > $total_page) $current_page = $total_page;
+        else if ($current_page < 1) $current_page = 1;
+
+$start = ($current_page - 1) * $limit >=0 ? ($current_page - 1) * $limit : 0;
+
 // read
 $dataClassesSql = "SELECT class.*, COUNT(student.studentID) AS numStudents
                   FROM class
                   LEFT JOIN student ON class.classID = student.classID
-                  GROUP BY class.classID";
+                  GROUP BY class.classID
+                  LIMIT $start, $limit";
 $dataClasses = mysqli_query($conn, $dataClassesSql);
 $scriptShowData="";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

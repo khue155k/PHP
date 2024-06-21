@@ -112,6 +112,24 @@
                                 ?>
                             </tbody>
                         </table>
+                        <div class="pagination">
+                            <?php
+                            if ($current_page > 1 && $total_page > 1) {
+                                echo '<a href="index.php?controller=AccountController&page=' . ($current_page - 1) . '">Prev</a> | ';
+                            }
+                            for ($i = 1; $i <= $total_page; $i++) {
+                                if ($i == $current_page) {
+                                    echo '<span>' . $i . '</span> | ';
+                                } else {
+                                    echo '<a href="index.php?controller=AccountController&page=' . $i . '">' . $i . '</a> | ';
+                                }
+                            }
+
+                            if ($current_page < $total_page && $total_page > 1) {
+                                echo '<a href="index.php?controller=AccountController&page=' . ($current_page + 1) . '">Next</a> | ';
+                            }
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>
