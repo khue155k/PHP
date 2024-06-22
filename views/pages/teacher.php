@@ -96,7 +96,7 @@
                                     <th scope="col">Địa chỉ</th>
                                     <th scope="col">Điện thoại</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Số lượng chuyến tham quan</th>
+                                    <th scope="col" class="w-10">Số lượng CTQ</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
@@ -137,18 +137,18 @@
                         <div class="pagination">
                             <?php
                             if ($current_page > 1 && $total_page > 1) {
-                                echo '<a href="index.php?controller=TeacherController&page=' . ($current_page - 1) . '">Prev</a> | ';
+                                echo '<a class="page-item" href="index.php?controller=TeacherController&page=' . ($current_page - 1) . '">Prev</a>';
                             }
                             for ($i = 1; $i <= $total_page; $i++) {
                                 if ($i == $current_page) {
-                                    echo '<span>' . $i . '</span> | ';
+                                    echo '<span class="page-item page-active">' . $i . '</span>';
                                 } else {
-                                    echo '<a href="index.php?controller=TeacherController&page=' . $i . '">' . $i . '</a> | ';
+                                    echo '<a class="page-item" href="index.php?controller=TeacherController&page=' . $i . '">' . $i . '</a>';
                                 }
                             }
 
                             if ($current_page < $total_page && $total_page > 1) {
-                                echo '<a href="index.php?controller=TeacherController&page=' . ($current_page + 1) . '">Next</a> | ';
+                                echo '<a class="page-item" href="index.php?controller=TeacherController&page=' . ($current_page + 1) . '">Next</a>';
                             }
                             ?>
                         </div>

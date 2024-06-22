@@ -71,6 +71,7 @@ body{
     display: block;
     margin: 8px 0;
     width: 100%;
+    white-space: nowrap;
 }
 
 .list-infor{
@@ -107,4 +108,26 @@ body{
 }
 .w-25 {
     width: 25%;
+}
+.pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 24px;
+}
+.page-item{
+    display: inline-block;
+    padding: 8px 16px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #000;
+}
+.page-item:hover{
+    color: blue;
+    text-decoration: underline;
+}
+.page-active{
+    background-color: cornflowerblue;
+    color: #fff;
+    border-radius: 4px;
 }
