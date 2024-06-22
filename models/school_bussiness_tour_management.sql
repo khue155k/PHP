@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 22, 2024 lúc 05:49 AM
+-- Thời gian đã tạo: Th6 22, 2024 lúc 06:47 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -447,7 +447,7 @@ CREATE TABLE `teacher` (
   `teacherID` int(11) NOT NULL,
   `code` varchar(100) NOT NULL,
   `fullName` varchar(100) NOT NULL,
-  `avatar` varchar(100) NOT NULL,
+  `gender` varchar(100) NOT NULL,
   `birthDate` varchar(100) NOT NULL,
   `address` varchar(100) NOT NULL,
   `phoneNumber` varchar(100) NOT NULL,
@@ -459,27 +459,27 @@ CREATE TABLE `teacher` (
 -- Đang đổ dữ liệu cho bảng `teacher`
 --
 
-INSERT INTO `teacher` (`teacherID`, `code`, `fullName`, `avatar`, `birthDate`, `address`, `phoneNumber`, `email`, `accountID`) VALUES
-(1, 'GV01', 'Nguyễn Thị Lan Anh', '', '12/06/1988', 'Hà Nội', '0123456789', 'lananh@gmail.com', 5),
-(2, 'GV02', 'Trần Thị Hằng', '', '23/02/1986', 'Hà Nam', '0123456988', 'tranhang@gmail.com', 6),
-(3, 'GV03', 'Đỗ Mạnh Quang', '', '16/05/1998', 'Hà Nội', '0123456898', 'manhquang@gmail.com', 14),
-(4, 'GV04', 'Trần Việt Thắng', '', '15/08/1982', 'Hà Nội', '0123467897', 'vietthang@gmail.com', 15),
-(5, 'GV05', 'Nguyễn Thế Anh', '', '14/03/1980', 'Hà Nội', '0123456456', 'theanh@gmail.com', 13),
-(6, 'GV06', 'Hoàng Quang Huy', '', '30/01/1985', 'Hà Nội', '0123123456', 'quanghuy@gmail.com', 16),
-(7, 'GV07', 'Nguyễn Thị Nhung', '', '16/08/1984', 'Hà Nội', '0123654789', 'nguyennhung@gmail.com', 17),
-(8, 'GV08', 'Trần Văn Hùng', '', '15/05/1980', 'Hà Nội', '0123658794', 'tranhung@gmail.com', 18),
-(9, 'GV09', 'Dương Thị Yến', '', '11/03/1988', 'Hà Nội', '0123658946', 'duongyen@gmail.com', 19),
-(10, 'GV10', 'Ngô Thế Hưởng', '', '15/05/1982', 'Hà Nội', '01597532684', 'ngohuong@gmail.com', 20),
-(11, 'GV11', 'Hà Nam Hải', '', '15/05/1982', 'Hà Nội', '0123698585', 'hahai@gmail.com', 21),
-(12, 'GV12', 'Mã Văn Tiến', '', '15/05/1982', 'Hà Nội', '0258963698', 'matien@gmail.com', 22),
-(13, 'GV13', 'Bùi Quang Thưởng', '', '15/05/1982', 'Hà Nội', '0321587478', 'buithuong@gmail.com', 23),
-(14, 'GV14', 'Bá Văn Hiển', '', '15/05/1982', 'Hà Nội', '0357841265', 'bahien@gmail.com', 24),
-(15, 'GV15', 'Đào Bá Lộc', '', '15/05/1982', 'Hà Nội', '0321596857', 'daoloc@gmail.com', 25),
-(16, 'GV16', 'Dương Văn Nam', '', '15/05/1982', 'Hà Nội', '0321562486', 'duongnam@gmail.com', 42),
-(17, 'GV17', 'Lê La La', '', '15/05/1982', 'Hà Nội', '0369852147', 'lela@gmail.com', 43),
-(18, 'GV18', 'Vũ Ngọc Hà', '', '15/05/1982', 'Hà Nội', '0147852369', 'vuha@gmail.com', 44),
-(19, 'GV19', 'Lý Nam Nhàn', '', '15/05/1982', 'Hà Nội', '0258741963', 'lynam@gmail.com', 45),
-(20, 'GV20', 'Trần Huỳnh Như', '', '15/05/1982', 'Hà Nội', '0123654852', 'trannhu@gmail.com', 46);
+INSERT INTO `teacher` (`teacherID`, `code`, `fullName`, `gender`, `birthDate`, `address`, `phoneNumber`, `email`, `accountID`) VALUES
+(1, 'GV01', 'Nguyễn Thị Lan Anh', 'Nữ', '12/06/1988', 'Hà Nội', '0987654321', 'lananh@gmail.com', 5),
+(2, 'GV02', 'Trần Thị Hằng', 'Nữ', '23/02/1986', 'Hà Nam', '0123456988', 'tranhang@gmail.com', 6),
+(3, 'GV03', 'Đỗ Mạnh Quang', 'Nam', '16/05/1998', 'Hà Nội', '0123456898', 'manhquang@gmail.com', 14),
+(4, 'GV04', 'Trần Việt Thắng', 'Nam', '15/08/1982', 'Hà Nội', '0123467897', 'vietthang@gmail.com', 15),
+(5, 'GV05', 'Nguyễn Thế Anh', 'Nam', '14/03/1980', 'Hà Nội', '0123456456', 'theanh@gmail.com', 13),
+(6, 'GV06', 'Hoàng Quang Huy', 'Nam', '30/01/1985', 'Hà Nội', '0123123456', 'quanghuy@gmail.com', 16),
+(7, 'GV07', 'Nguyễn Thị Nhung', 'Nữ', '16/08/1984', 'Hà Nội', '0123654789', 'nguyennhung@gmail.com', 17),
+(8, 'GV08', 'Trần Văn Hùng', 'Nam', '15/05/1980', 'Hà Nội', '0123658794', 'tranhung@gmail.com', 18),
+(9, 'GV09', 'Dương Thị Yến', 'Nữ', '11/03/1988', 'Hà Nội', '0123658946', 'duongyen@gmail.com', 19),
+(10, 'GV10', 'Ngô Thế Hưởng', 'Nam', '15/05/1982', 'Hà Nội', '01597532684', 'ngohuong@gmail.com', 20),
+(11, 'GV11', 'Hà Nam Hải', 'Nam', '15/05/1982', 'Hà Nội', '0123698585', 'hahai@gmail.com', 21),
+(12, 'GV12', 'Mã Văn Tiến', 'Nam', '15/05/1982', 'Hà Nội', '0258963698', 'matien@gmail.com', 22),
+(13, 'GV13', 'Bùi Quang Thưởng', 'Nam', '15/05/1982', 'Hà Nội', '0321587478', 'buithuong@gmail.com', 23),
+(14, 'GV14', 'Bá Văn Hiển', 'Nam', '15/05/1982', 'Hà Nội', '0357841265', 'bahien@gmail.com', 24),
+(15, 'GV15', 'Đào Bá Lộc', 'Nam', '15/05/1982', 'Hà Nội', '0321596857', 'daoloc@gmail.com', 25),
+(16, 'GV16', 'Dương Văn Nam', 'Nam', '15/05/1982', 'Hà Nội', '0321562486', 'duongnam@gmail.com', 42),
+(17, 'GV17', 'Lê La La', 'Nữ', '15/05/1982', 'Hà Nội', '0369852147', 'lela@gmail.com', 43),
+(18, 'GV18', 'Vũ Ngọc Hà', 'Nữ', '15/05/1982', 'Hà Nội', '0147852369', 'vuha@gmail.com', 44),
+(19, 'GV19', 'Lý Nam Nhàn', 'Nam', '15/05/1982', 'Hà Nội', '0258741963', 'lynam@gmail.com', 45),
+(20, 'GV20', 'Trần Huỳnh Như', 'Nữ', '15/05/1982', 'Hà Nội', '0123654852', 'trannhu@gmail.com', 46);
 
 -- --------------------------------------------------------
 
