@@ -89,6 +89,10 @@ session_start();
                 require_once('controllers/TeacherChangeInforController.php');
                 break;
             }
+            case 'EvaluateStudentController':{
+                require_once('controllers/EvaluateStudentController.php');
+                break;
+            }
             default:{
                 require_once('controllers/LoginController.php');
                 break;

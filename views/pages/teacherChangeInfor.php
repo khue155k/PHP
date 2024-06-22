@@ -47,7 +47,7 @@
     <div class='user-infor flex-sb'>
         <div class="user-infor-left">
             <?php
-            include __DIR__ . '/../components/sidebarUser.php';
+            include __DIR__ . '/../components/sidebarTeacher.php';
             ?>
         </div>
         <div class="user-infor-right flex-grow-1">
