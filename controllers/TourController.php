@@ -87,6 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 //update
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['updateTour'])) {
+        print('lỗi');
         if (
             isset($_POST["tourID"]) && isset($_POST["code"]) && isset($_POST["tourName"])
             && isset($_POST["description"]) && isset($_POST["startDate"])

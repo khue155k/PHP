@@ -147,7 +147,7 @@
         </div>
     </div>
     <!-- modal update -->
-    <div class="modal fade" id="updateTourModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="updateTour" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
@@ -156,8 +156,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
                     </div>
                     <br>
-                    <!-- sửa form  -->
                     <form method="POST">
+                        <input required type="hidden" name="tourID" id="tourID">
                         <div class="mb-3">
                             <label for="code" class="col-form-label">Mã Chuyến tham quan:</label>
                             <input required type="text" class="form-control" name="code" id="code">
@@ -245,44 +245,42 @@
         </div>
     </div>
     <script>
-        $(document).ready(function () {
-            $('.update-tour').on('click', function () {
-                $('#updateTourModal').modal('show');
-                $tr = $(this).closest('tr');
-                let data = $tr.children("td").map(function () {
-                    return $(this).text();
-                }).get();
-                $('#tourID').val(data[0]);
-                $('#code').val(data[1]);
-                $('#tourName').val(data[2]);
-                $('#description').val(data[3]);
-                // Chuyển đổi chuỗi "2024-08-07 13:44:34" thành đối tượng Date
-                var dateString = "2024-08-07 13:44:34";
-                var dateObject = new Date(dateString);
-
-                // Định dạng lại ngày tháng để phù hợp với input type="date"
-                var formattedDate = dateObject.toISOString().slice(0, 10);
-
-                // Gán giá trị vào trường input "startDate"
-                $('#startDate').val(formattedDate);
-                $('#presentator').val(data[5]);
-                $('#availables').val(Number(data[6]));
-                var companyId = $(this).closest('tr').find('td[id]').attr('id');
-                $('#companyId').val(companyId);
-                var teacherId = $(this).closest('tr').find('td[id]').attr('id');
-                $('#teacherId').val(teacherId);
-                console.log(data);
-            });
-            $('.delete-tour').on('click', function () {
-                $('#deleteTourModal').modal('show');
-                $tr = $(this).closest('tr');
-                let data = $tr.children("td").map(function () {
-                    return $(this).text();
-                }).get();
-                console.log(data);
-                $('#deleteID').val(data[0]);
-            });
+    $(document).ready(function() {
+        $('.update-tour').on('click', function() {
+            $('#updateTour').modal('show');
+            $tr = $(this).closest('tr');
+            let data = $tr.children("td").map(function() {
+                return $(this).text();
+            }).get();
+            $('#tourID').val(data[0]);
+            $('#code').val(data[1]);
+            $('#tourName').val(data[2]);
+            $('#description').val(data[3]);
+            // Chuyển đổi chuỗi "2024-08-07 13:44:34" thành đối tượng Date
+            var dateString = "2024-08-07 13:44:34";
+            var dateObject = new Date(dateString);
+            // Định dạng lại ngày tháng để phù hợp với input type="date"
+            var formattedDate = dateObject.toISOString().slice(0, 10);
+            // Gán giá trị vào trường input "startDate"
+            $('#startDate').val(formattedDate);
+            $('#presentator').val(data[5]);
+            $('#availables').val(Number(data[6]));
+            var companyId = $(this).closest('tr').find('td[id]').attr('id');
+            $('#companyId').val(companyId);
+            var teacherId = $(this).closest('tr').find('td[id]').attr('id');
+            $('#teacherId').val(teacherId);
+            console.log(data);
         });
+        $('.delete-tour').on('click', function() {
+            $('#deleteTourModal').modal('show');
+            $tr = $(this).closest('tr');
+            let data = $tr.children("td").map(function() {
+                return $(this).text();
+            }).get();
+            console.log(data);
+            $('#deleteID').val(data[0]);
+        });
+    });
     </script>
 </body>
 

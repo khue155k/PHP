@@ -21,7 +21,7 @@
             <?php
                 include __DIR__ . '/../components/header.php';
             ?>
-            <div class="container pad-0-28"  id="listClass">
+            <div class="container pad-0-28" id="listClass">
                 <div class="flex-sb-center pad-20-0">
                     <h1 class="h1-title">Danh sách lớp học</h1>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -53,7 +53,8 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Hủy</button>
-                                        <button type="submit" class="btn btn-primary" name="createClass">Tạo lớp học</button>
+                                        <button type="submit" class="btn btn-primary" name="createClass">Tạo lớp
+                                            học</button>
                                     </div>
                                 </form>
                             </div>
@@ -106,14 +107,14 @@
                     </div>
                 </div>
             </div>
-            <div class="container pad-0-28" hidden  id="showData">
+            <div class="container pad-0-28" hidden id="showData">
                 <div class="flex-sb-center pad-20-0">
                     <h1 class="h1-title">Danh sách sinh viên của lớp học</h1>
                     <button type="button" class="btn btn-primary" id="showListClasses">Xem danh sách lớp học</button>
                 </div>
                 <div class="container-body">
                     <div class="container-table">
-                    <?php
+                        <?php
                         if (isset($dataClass)) {
                             mysqli_num_rows($dataClass);
                             $row = mysqli_fetch_assoc($dataClass);
@@ -202,8 +203,7 @@
     </div>
 
     <!-- modal delete -->
-    <div class="modal fade" id="deleteClassModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="deleteClassModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
@@ -226,8 +226,8 @@
     </div>
 
     <!-- modal thông báo -->
-    <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog"
-        aria-labelledby="notificationModalLabel" aria-hidden="true">
+    <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -244,8 +244,8 @@
     <script>
     <?php echo $scriptShowData ?>
     document.getElementById('showListClasses').addEventListener('click', function() {
-            document.getElementById('listClass').hidden = false;
-            document.getElementById('showData').hidden = true;
+        document.getElementById('listClass').hidden = false;
+        document.getElementById('showData').hidden = true;
     });
     $(document).ready(function() {
         $('.update-class').on('click', function() {

@@ -87,7 +87,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 // update
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['updateClass'])) {
-        if (isset($_POST["classname"]) && isset($_POST["code"]) && isset($_POST["classID"])) {
+        if (
+            isset($_POST["classname"]) && isset($_POST["code"]) && isset($_POST["classID"])) {
             $updateId = $_POST["classID"];
             $code = $_POST["code"];
             $classname = $_POST["classname"];
