@@ -15,11 +15,10 @@ if($curentUserInfor && mysqli_num_rows($curentUserInfor) > 0)
         COUNT(tour.tourID) AS total
     FROM 
         tour
-    LEFT JOIN 
+    INNER JOIN 
         student_tour ON tour.tourID = student_tour.tourID AND student_tour.studentID = $studentID
     WHERE 
-        student_tour.studentID IS NULL
-        AND (
+        (
             (tour.startDate LIKE '%/%/%' AND STR_TO_DATE(tour.startDate, '%d/%m/%Y') > DATE_ADD(CURDATE(), INTERVAL 2 DAY))
             OR
             (tour.startDate LIKE '%-%-%' AND STR_TO_DATE(tour.startDate, '%Y-%m-%d') > DATE_ADD(CURDATE(), INTERVAL 2 DAY))
@@ -50,13 +49,16 @@ if($curentUserInfor && mysqli_num_rows($curentUserInfor) > 0)
         tour.teacherID,
         teacher.fullName AS teacherName,
         company.name AS companyName
-    FROM tour
-    INNER JOIN teacher ON tour.teacherID = teacher.teacherID
-    INNER JOIN company ON tour.companyID = company.companyID
-    LEFT JOIN student_tour ON tour.tourID = student_tour.tourID AND student_tour.studentID = $studentID
+    FROM 
+        tour
+    INNER JOIN 
+        teacher ON tour.teacherID = teacher.teacherID
+    INNER JOIN 
+        company ON tour.companyID = company.companyID
+    INNER JOIN 
+        student_tour ON tour.tourID = student_tour.tourID AND student_tour.studentID = $studentID
     WHERE 
-        student_tour.studentID IS NULL
-        AND (
+        (
             (tour.startDate LIKE '%/%/%' AND STR_TO_DATE(tour.startDate, '%d/%m/%Y') > DATE_ADD(CURDATE(), INTERVAL 2 DAY))
             OR
             (tour.startDate LIKE '%-%-%' AND STR_TO_DATE(tour.startDate, '%Y-%m-%d') > DATE_ADD(CURDATE(), INTERVAL 2 DAY))
@@ -71,29 +73,29 @@ if($curentUserInfor && mysqli_num_rows($curentUserInfor) > 0)
         $scriptShowData = "document.getElementById('pagination').hidden = false;";
     }
 
-    // đăng ký
+    // hủy đăng ký
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
-        if(isset($_POST['tourIDToRegister']) && isset($_POST['registerTour']))
+        if(isset($_POST['tourIDToDelete']) && isset($_POST['deleteTour']))
         {
-            $tourIDToRegister = $_POST['tourIDToRegister'];
-            $registerSql = "INSERT INTO student_tour(tourID, studentID, rate) VALUES($tourIDToRegister, $studentID, 0)";
-            $registerQuery = mysqli_query($conn,$registerSql);
-            if($registerQuery)
+            $tourIDToDelete = $_POST['tourIDToDelete'];
+            $deleteTourSql = "DELETE FROM student_tour WHERE studentID = $studentID AND tourID = $tourIDToDelete";
+            $deleteTourQuery = mysqli_query($conn,$deleteTourSql);
+            if($deleteTourQuery)
             {
                 echo "<script>
                     document.addEventListener('DOMContentLoaded', function() {
-                        document.getElementById('modalMessage').innerText = 'Đăng ký tham quan doanh nghiệp thành công';
+                        document.getElementById('modalMessage').innerText = 'Hủy đăng ký tham quan doanh nghiệp thành công';
                         $('#notificationModal').modal('show');
                         $('#notificationModal').on('hidden.bs.modal', function () {
-                            window.location.href = '/PHP_Nhom3/index.php?controller=StudentRegisterTourController';
+                            window.location.href = '/PHP_Nhom3/index.php?controller=StudentDeleteTourRegistrationController';
                         });
                     });
                 </script>";
             }else{
                 echo "<script>
                     document.addEventListener('DOMContentLoaded', function() {
-                        document.getElementById('modalMessage').innerText = 'Đăng ký tham quan doanh nghiệp thất bại';
+                        document.getElementById('modalMessage').innerText = 'Hủy đăng ký tham quan doanh nghiệp thất bại';
                         $('#notificationModal').modal('show');
                     });
                 </script>";
@@ -111,4 +113,4 @@ if($curentUserInfor && mysqli_num_rows($curentUserInfor) > 0)
         });
     </script>";
 }
-require_once __DIR__ . '/../views/pages/studentRegisterTour.php';
+require_once __DIR__ . '/../views/pages/studentDeleteTourRegistration.php';
