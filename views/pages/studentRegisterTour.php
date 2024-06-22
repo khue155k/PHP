@@ -59,10 +59,10 @@
                                     echo "<td>" . $row['companyName'] . "</td>";
                                     echo "<td>" . $row['teacherName'] . "</td>";
                                     echo "<td>
-                                    <form method='POST' class='form-inline'>
-                                        <input type='hidden' name='tourIDToRegister' value='" . $row['tourID'] . "'>
-                                        <button type='submit' class='showData' name='registerTour'>Đăng ký</button>
-                                    </form>
+                                        <form method='POST' class='form-inline'>
+                                            <input type='hidden' name='tourIDToRegister' value='" . $row['tourID'] . "'>
+                                            <button type='submit' class='showData' name='registerTour'>Đăng ký</button>
+                                        </form>
                                     </td>";
                                     echo "</tr>";
                                 }

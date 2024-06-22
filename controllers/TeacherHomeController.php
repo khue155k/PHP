@@ -1,4 +1,5 @@
 <?php
+ $scriptShowData = '';
 $getQualityTourSql = "SELECT COUNT(tourID) AS qofTour FROM tour";
 $getQualityTour = mysqli_query($conn, $getQualityTourSql);
 
@@ -46,14 +47,10 @@ $getTourNowSql = " SELECT
     teacher.fullName AS teacherName,
     company.name AS companyName
 FROM 
-    student_tour
-LEFT JOIN 
-    tour ON tour.tourID = student_tour.tourID 
-LEFT JOIN 
-    student ON student.studentID = student_tour.studentID 
-LEFT JOIN 
+    tour
+INNER JOIN 
     teacher ON tour.teacherID = teacher.teacherID
-LEFT JOIN 
+INNER JOIN 
     company ON tour.companyID = company.companyID
 WHERE 
     (CASE 
@@ -61,13 +58,48 @@ WHERE
         WHEN tour.startDate LIKE '%-%-%' THEN STR_TO_DATE(tour.startDate, '%Y-%m-%d')
         ELSE NULL
     END) = CURDATE() 
-    AND student.accountID = $accountIDNow;
+    AND teacher.accountID = $accountIDNow;
 ";
 
 
 $getTourNow = mysqli_query($conn, $getTourNowSql);
 if (!$getTourNow) {
     echo "Lỗi khi thực hiện truy vấn: " . mysqli_error($conn);
+}
+
+if($_SERVER['REQUEST_METHOD'] == 'POST')
+{
+    if(isset($_POST['tourIDToShowData']) && isset($_POST['showDataStudents']))
+    {
+        $tourIDToShowData = $_POST['tourIDToShowData'];
+        $getDataTourSql = "
+            SELECT tour.*, 
+                teacher.fullName AS teacherName,
+                company.name AS companyName 
+            FROM tour 
+            INNER JOIN 
+                teacher ON tour.teacherID = teacher.teacherID
+            INNER JOIN 
+                company ON tour.companyID = company.companyID
+            WHERE tourID = $tourIDToShowData";
+        $getDataTour = mysqli_query($conn,$getDataTourSql);
+        $rowDataTour  = '';
+        if($getDataTour && mysqli_num_rows($getDataTour) > 0)
+        {
+            $rowDataTour = mysqli_fetch_assoc($getDataTour);
+        }
+
+        $getDataStudentsSql = "
+            SELECT student.*, class.name AS classname
+            FROM student_tour
+            INNER JOIN student ON student.studentID = student_tour.studentID
+            INNER JOIN class on student.classID = class.classID
+            WHERE student_tour.tourID =  $tourIDToShowData"; 
+        $getDataStudents = mysqli_query($conn,$getDataStudentsSql);
+        $scriptShowData = "
+            document.getElementById('notShowStudents').hidden = true;
+            document.getElementById('showStudents').hidden = false;";
+    }
 }
 
 require_once __DIR__ . '/../views/pages/teacherHome.php';
