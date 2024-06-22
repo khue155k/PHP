@@ -57,6 +57,26 @@ session_start();
                 require_once('controllers/AccountController.php');
                 break;
             }
+            case 'StudentChangePasswordController':{
+                require_once('controllers/StudentChangePasswordController.php');
+                break;
+            }
+            case 'StudentChangeInforController':{
+                require_once('controllers/StudentChangeInforController.php');
+                break;
+            }
+            case 'StudentTourHistoryController':{
+                require_once('controllers/StudentTourHistoryController.php');
+                break;
+            }
+            case 'StudentRegisterTourController':{
+                require_once('controllers/StudentRegisterTourController.php');
+                break;
+            }
+            case 'StudentDeleteTourRegistrationController':{
+                require_once('controllers/StudentDeleteTourRegistrationController.php');
+                break;
+            }
             default:{
                 require_once('controllers/LoginController.php');
                 break;

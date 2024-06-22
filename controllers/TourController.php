@@ -1,11 +1,26 @@
 <?php
+//pagination
+$pagination = mysqli_query($conn, "SELECT COUNT(tourID) AS total FROM tour");
+$row = mysqli_fetch_assoc($pagination);
+$total_records = $row['total'];
+
+$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+$limit = 3;
+$total_page = ceil($total_records / $limit);
+
+if ($current_page > $total_page) $current_page = $total_page;
+        else if ($current_page < 1) $current_page = 1;
+
+$start = ($current_page - 1) * $limit >=0 ? ($current_page - 1) * $limit : 0;
+
 // read 
 $dataTourSql = "SELECT `tour`.`tourID`, `tour`.`code`, `tour`.`name` as tourName,
     `tour`.`description`, `tour`.`startDate`, `tour`.`presentator`, `tour`.`availables`,
     `company`.`name` as companyName, `teacher`.`fullName`, `company`.`companyID`, `teacher`.`teacherID`
     FROM `tour` 
-        LEFT JOIN `company` ON `tour`.`companyID` = `company`.`companyID` 
-        LEFT JOIN `teacher` ON `tour`.`teacherID` = `teacher`.`teacherID`;";
+    LEFT JOIN `company` ON `tour`.`companyID` = `company`.`companyID` 
+    LEFT JOIN `teacher` ON `tour`.`teacherID` = `teacher`.`teacherID`
+    LIMIT $start, $limit";
 $dataTour = mysqli_query($conn, $dataTourSql);
 // đưa code logic ifelse mysqli_num_rows($dataTour) về đây 
 
