@@ -21,7 +21,7 @@
             <?php
                 include __DIR__ . '/../components/header.php';
             ?>
-            <div class="container pad-0-28"  id="listClass">
+            <div class="container pad-0-28" id="listClass">
                 <div class="flex-sb-center pad-20-0">
                     <h1 class="h1-title">Danh sách lớp học</h1>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -53,7 +53,8 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Hủy</button>
-                                        <button type="submit" class="btn btn-primary" name="createClass">Tạo lớp học</button>
+                                        <button type="submit" class="btn btn-primary" name="createClass">Tạo lớp
+                                            học</button>
                                     </div>
                                 </form>
                             </div>
@@ -103,17 +104,35 @@
                                 ?>
                             </tbody>
                         </table>
+                        <div class="pagination">
+                            <?php
+                            if ($current_page > 1 && $total_page > 1) {
+                                echo '<a href="index.php?controller=ClassController&page=' . ($current_page - 1) . '">Prev</a> | ';
+                            }
+                            for ($i = 1; $i <= $total_page; $i++) {
+                                if ($i == $current_page) {
+                                    echo '<span>' . $i . '</span> | ';
+                                } else {
+                                    echo '<a href="index.php?controller=ClassController&page=' . $i . '">' . $i . '</a> | ';
+                                }
+                            }
+
+                            if ($current_page < $total_page && $total_page > 1) {
+                                echo '<a href="index.php?controller=ClassController&page=' . ($current_page + 1) . '">Next</a> | ';
+                            }
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="container pad-0-28" hidden  id="showData">
+            <div class="container pad-0-28" hidden id="showData">
                 <div class="flex-sb-center pad-20-0">
                     <h1 class="h1-title">Danh sách sinh viên của lớp học</h1>
                     <button type="button" class="btn btn-primary" id="showListClasses">Xem danh sách lớp học</button>
                 </div>
                 <div class="container-body">
                     <div class="container-table">
-                    <?php
+                        <?php
                         if (isset($dataClass)) {
                             mysqli_num_rows($dataClass);
                             $row = mysqli_fetch_assoc($dataClass);
@@ -131,6 +150,7 @@
                                     <th scope="col">STT</th>
                                     <th scope="col">Mã sinh viên</th>
                                     <th scope="col">Họ tên</th>
+                                    <th scope="col">Giới tính</th>
                                     <th scope="col">Ngày sinh</th>
                                     <th scope="col">Địa chỉ</th>
                                     <th scope="col">Điện thoại</th>
@@ -139,24 +159,27 @@
                             </thead>
                             <tbody>
                                 <?php
-                                if (mysqli_num_rows($dataStudents) > 0) {
-                                    $i = 0;
-                                    while ($row = mysqli_fetch_assoc($dataStudents)) {
-                                        $i += 1;
+                                if (isset($dataStudents)){
+                                    if (mysqli_num_rows($dataStudents) > 0) {
+                                        $i = 0;
+                                        while ($row = mysqli_fetch_assoc($dataStudents)) {
+                                            $i += 1;
+                                            echo "<tr>";
+                                            echo "<th scope='row'>" . $i . "</th>";
+                                            echo "<td>" . $row['code'] . "</td>";
+                                            echo "<td>" . $row['fullName'] . "</td>";
+                                            echo "<td>" . $row['gender'] . "</td>";
+                                            echo "<td>" . $row['birthDate'] . "</td>";
+                                            echo "<td>" . $row['address'] . "</td>";
+                                            echo "<td>" . $row['phoneNumber'] . "</td>";
+                                            echo "<td>" . $row['email'] . "</td>";
+                                            echo "</tr>";
+                                        }
+                                    } else {
                                         echo "<tr>";
-                                        echo "<th scope='row'>" . $i . "</th>";
-                                        echo "<td>" . $row['code'] . "</td>";
-                                        echo "<td>" . $row['fullName'] . "</td>";
-                                        echo "<td>" . $row['birthDate'] . "</td>";
-                                        echo "<td>" . $row['address'] . "</td>";
-                                        echo "<td>" . $row['phoneNumber'] . "</td>";
-                                        echo "<td>" . $row['email'] . "</td>";
+                                        echo "<td colspan='7'>Không có sinh viên nào</td>";
                                         echo "</tr>";
                                     }
-                                } else {
-                                    echo "<tr>";
-                                    echo "<td colspan='6'>Không có sinh viên nào</td>";
-                                    echo "</tr>";
                                 }
                                 ?>
                             </tbody>
@@ -172,7 +195,7 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Cập nhập tài khoản</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Cập nhập lớp học</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
                     </div>
                     <br>
@@ -189,7 +212,7 @@
                         <br>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                            <button type="submit" class="btn btn-primary" name="updateClass">Cập nhập</button>
+                            <button type="submit" class="btn btn-primary" name="updateClass">Cập nhật</button>
                         </div>
                     </form>
                 </div>
@@ -198,8 +221,7 @@
     </div>
 
     <!-- modal delete -->
-    <div class="modal fade" id="deleteClassModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="deleteClassModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
@@ -222,8 +244,8 @@
     </div>
 
     <!-- modal thông báo -->
-    <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog"
-        aria-labelledby="notificationModalLabel" aria-hidden="true">
+    <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -240,8 +262,8 @@
     <script>
     <?php echo $scriptShowData ?>
     document.getElementById('showListClasses').addEventListener('click', function() {
-            document.getElementById('listClass').hidden = false;
-            document.getElementById('showData').hidden = true;
+        document.getElementById('listClass').hidden = false;
+        document.getElementById('showData').hidden = true;
     });
     $(document).ready(function() {
         $('.update-class').on('click', function() {
