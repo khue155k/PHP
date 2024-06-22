@@ -14,27 +14,23 @@ else if ($current_page < 1) $current_page = 1;
 $start = ($current_page - 1) * $limit >= 0 ? ($current_page - 1) * $limit : 0;
 
 //read
-$dataTeachersSql = "SELECT teacher.teacherID, teacher.code, fullName, gender, birthDate, address, phoneNumber, email, COUNT(tourID) AS totalTourTeacher FROM teacher 
-                    LEFT JOIN tour on tour.teacherID = teacher.teacherID
-                    GROUP BY tour.teacherID
+$dataTeachersSql = "SELECT teacher.teacherID, teacher.code, fullName, gender, birthDate, address, phoneNumber, email, COALESCE(COUNT(tourID), 0) AS totalTourTeacher FROM teacher 
+                    LEFT JOIN tour on teacher.teacherID = tour.teacherID
+                    GROUP BY teacher.teacherID 
+                    ORDER BY teacher.teacherID
                         LIMIT $start, $limit";
 $dataTeachers = mysqli_query($conn, $dataTeachersSql);
 
-// $dataClassSql = "SELECT classID,name FROM class";
-// $dataClass = mysqli_query($conn, $dataClassSql);
-// $dataSelect = "";
-// if (mysqli_num_rows($dataClass) > 0) {
-//     while ($row = mysqli_fetch_assoc($dataClass)) {
-//         $dataSelect .= "<option value=" . $row['classID'] . ">" . $row['name'] . "</option>";
-//     }
-// }
 $scriptShowData = "";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['showData'])) {
         $teacherID = $_POST["teacherID"];
 
-        $dataTeacherSql = "SELECT teacher.code, fullName, gender, birthDate, address, phoneNumber, email FROM teacher 
-                               WHERE teacherID = $teacherID";
+        $dataTeacherSql = "SELECT teacher.code, fullName, gender, birthDate, address, phoneNumber, email, COALESCE(COUNT(tourID), 0) AS totalTourTeacher FROM teacher 
+                            LEFT JOIN tour on teacher.teacherID = tour.teacherID
+                            WHERE teacher.teacherID = $teacherID
+                            GROUP BY tour.teacherID 
+                            ORDER BY teacher.teacherID";
         $dataTeacher = mysqli_query($conn, $dataTeacherSql);
 
         $dataTeacherTourSql = "SELECT tour.code, tour.name, startDate, company.name AS companyName, COUNT(studentID) AS totalStudentTour FROM student_tour
