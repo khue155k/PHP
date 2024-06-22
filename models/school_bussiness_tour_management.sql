@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 16, 2024 lúc 04:33 PM
+-- Thời gian đã tạo: Th6 22, 2024 lúc 05:49 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -603,7 +603,7 @@ ALTER TABLE `company`
 -- AUTO_INCREMENT cho bảng `student`
 --
 ALTER TABLE `student`
-  MODIFY `studentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `studentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT cho bảng `teacher`
@@ -625,28 +625,28 @@ ALTER TABLE `tour`
 -- Các ràng buộc cho bảng `student`
 --
 ALTER TABLE `student`
-  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`classID`) REFERENCES `class` (`classID`),
-  ADD CONSTRAINT `student_ibfk_2` FOREIGN KEY (`accountID`) REFERENCES `account` (`accountID`);
+  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`classID`) REFERENCES `class` (`classID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `student_ibfk_2` FOREIGN KEY (`accountID`) REFERENCES `account` (`accountID`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `student_tour`
 --
 ALTER TABLE `student_tour`
-  ADD CONSTRAINT `student_tour_ibfk_1` FOREIGN KEY (`studentID`) REFERENCES `student` (`studentID`),
-  ADD CONSTRAINT `student_tour_ibfk_2` FOREIGN KEY (`tourID`) REFERENCES `tour` (`tourID`);
+  ADD CONSTRAINT `student_tour_ibfk_1` FOREIGN KEY (`studentID`) REFERENCES `student` (`studentID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `student_tour_ibfk_2` FOREIGN KEY (`tourID`) REFERENCES `tour` (`tourID`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `teacher`
 --
 ALTER TABLE `teacher`
-  ADD CONSTRAINT `teacher_ibfk_1` FOREIGN KEY (`accountID`) REFERENCES `account` (`accountID`);
+  ADD CONSTRAINT `teacher_ibfk_1` FOREIGN KEY (`accountID`) REFERENCES `account` (`accountID`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `tour`
 --
 ALTER TABLE `tour`
-  ADD CONSTRAINT `tour_ibfk_1` FOREIGN KEY (`teacherID`) REFERENCES `teacher` (`teacherID`),
-  ADD CONSTRAINT `tour_ibfk_2` FOREIGN KEY (`companyID`) REFERENCES `company` (`companyID`);
+  ADD CONSTRAINT `tour_ibfk_1` FOREIGN KEY (`teacherID`) REFERENCES `teacher` (`teacherID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `tour_ibfk_2` FOREIGN KEY (`companyID`) REFERENCES `company` (`companyID`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
