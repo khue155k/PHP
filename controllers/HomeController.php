@@ -33,7 +33,6 @@ if ($getQualityTour && $getQualityTeacher && $getQualityStudent && $getQualityCo
 }
 
 $accountIDNow = $_SESSION['accountIdNow'];
-echo "<script>console.log(" . $accountIDNow . ")</script>";
 $getTourNowSql = " SELECT 
     tour.tourID,
     tour.code,
