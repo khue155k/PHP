@@ -77,6 +77,18 @@ session_start();
                 require_once('controllers/StudentDeleteTourRegistrationController.php');
                 break;
             }
+            case 'TeacherHomeController':{
+                require_once('controllers/TeacherHomeController.php');
+                break;
+            }
+            case 'TeacherChangePasswordController':{
+                require_once('controllers/TeacherChangePasswordController.php');
+                break;
+            }
+            case 'TeacherChangeInforController':{
+                require_once('controllers/TeacherChangeInforController.php');
+                break;
+            }
             default:{
                 require_once('controllers/LoginController.php');
                 break;

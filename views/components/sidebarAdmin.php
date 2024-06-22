@@ -191,7 +191,13 @@
         let links = document.querySelectorAll("ul li a");
         let currentUrl = window.location.href;
         let findQuery = currentUrl.indexOf('&');
-        let currentUrlNotQuery = currentUrl.slice(0, findQuery);
+        let currentUrlNotQuery = '';
+        if(findQuery > 0)
+        {
+            currentUrlNotQuery = currentUrl.slice(0, findQuery);
+        }else{
+            currentUrlNotQuery = currentUrl;
+        }
         links.forEach(function(link) {
             if (link.href === currentUrlNotQuery) {
                 link.parentElement.classList.add("active");

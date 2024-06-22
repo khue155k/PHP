@@ -21,6 +21,12 @@ body{
     display: flex;
     justify-content: space-between;
 }
+.table{
+    width: 100% !important;
+}
+.container{
+    width: 100% !important;
+}
 .hiddenId{
     display: none !important;
 }
@@ -111,24 +117,24 @@ body{
     width: 25%;
 }
 .pagination{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 24px;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-top: 24px !important;
 }
 .page-item{
-    display: inline-block;
-    padding: 8px 16px;
-    font-weight: 500;
-    text-decoration: none;
-    color: #000;
+    display: inline-block !important;
+    padding: 8px 16px !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    color: #000 !important;
 }
 .page-item:hover{
-    color: blue;
-    text-decoration: underline;
+    color: blue !important;
+    text-decoration: underline !important;
 }
 .page-active{
-    background-color: cornflowerblue;
-    color: #fff;
-    border-radius: 4px;
+    background-color: cornflowerblue !important;
+    color: #fff !important;
+    border-radius: 4px !important;
 }
