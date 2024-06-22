@@ -110,8 +110,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $email = $_POST["email"];
         $classID = $_POST["classID"];
 
-        $checkStudentSql = "SELECT * FROM student WHERE code = '$code'";
-        $checkStudentResult = mysqli_query($conn, $checkStudentSql);
         $updateStudentSql = "UPDATE student SET fullName = '$fullName', gender = '$gender', birthDate = '$birthDate', address = '$address', phoneNumber = '$phoneNumber', email = '$email', classID = '$classID' 
                                 WHERE studentID = $studentID";
         if (!mysqli_query($conn, $updateStudentSql)) {
@@ -140,16 +138,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST["deleteID"])) {
         $deleteId = $_POST["deleteID"];
-        $checkRoles = "SELECT * FROM student WHERE studentID = '$deleteId'";
-        $data = mysqli_query($conn, $checkRoles);
-        $row = mysqli_fetch_assoc($data);
 
         $deleteSql = "DELETE FROM student WHERE studentID = '$deleteId'";
         if (!mysqli_query($conn, $deleteSql)) {
             $errorMessage = mysqli_real_escape_string($conn, mysqli_error($conn));
             echo "<script>
                         document.addEventListener('DOMContentLoaded', function() {
-                            document.getElementById('modalMessage').innerText = 'Xóa tài khoản thất bại: $errorMessage';
+                            document.getElementById('modalMessage').innerText = 'Xóa sinh viên thất bại: $errorMessage';
                             $('#notificationModal').modal('show');
                             setTimeout(function(){
                                 window.location.href = '/PHP_Nhom3/index.php?controller=StudentController';
@@ -159,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             echo "<script>
                         document.addEventListener('DOMContentLoaded', function() {
-                            document.getElementById('modalMessage').innerText = 'Tài khoản đã được xóa thành công';
+                            document.getElementById('modalMessage').innerText = 'Sinh viên đã được xóa thành công';
                             $('#notificationModal').modal('show');
                             setTimeout(function(){
                                 window.location.href = '/PHP_Nhom3/index.php?controller=StudentController';
