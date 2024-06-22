@@ -30,10 +30,9 @@ if($curentUserInfor && mysqli_num_rows($curentUserInfor) > 0)
             else if ($current_page < 1) $current_page = 1;
 
     $start = ($current_page - 1) * $limit >=0 ? ($current_page - 1) * $limit : 0;
-}
 
-// get data
-$getTourHistorySql = " SELECT 
+    // get data
+    $getTourHistorySql = " SELECT 
     tour.tourID,
     tour.code,
     tour.name,
@@ -45,33 +44,43 @@ $getTourHistorySql = " SELECT
     tour.teacherID,
     teacher.fullName AS teacherName,
     company.name AS companyName
-FROM 
+    FROM 
     student_tour
-LEFT JOIN 
+    LEFT JOIN 
     tour ON tour.tourID = student_tour.tourID 
-LEFT JOIN 
+    LEFT JOIN 
     student ON student.studentID = student_tour.studentID 
-LEFT JOIN 
+    LEFT JOIN 
     teacher ON tour.teacherID = teacher.teacherID
-LEFT JOIN 
+    LEFT JOIN 
     company ON tour.companyID = company.companyID
-WHERE 
+    WHERE 
     (CASE 
         WHEN tour.startDate LIKE '%/%/%' THEN STR_TO_DATE(tour.startDate, '%d/%m/%Y')
         WHEN tour.startDate LIKE '%-%-%' THEN STR_TO_DATE(tour.startDate, '%Y-%m-%d')
         ELSE NULL
     END) < CURDATE() 
     AND student.accountID = $accountIDNow
-LIMIT $start, $limit;
-";
+    LIMIT $start, $limit;";
 
-$getTourHistory = mysqli_query($conn, $getTourHistorySql);
-if (!$getTourHistory) {
-    echo "Lỗi khi thực hiện truy vấn: " . mysqli_error($conn);
-}
-if(mysqli_num_rows($getTourHistory) > $limit)
-{
-    $scriptShowData="document.getElementById('pagination').hidden = false;";
+    $getTourHistory = mysqli_query($conn, $getTourHistorySql);
+    if (!$getTourHistory) {
+        echo "Lỗi khi thực hiện truy vấn: " . mysqli_error($conn);
+    }
+    if(mysqli_num_rows($getTourHistory) > 1)
+    {
+        $scriptShowData="document.getElementById('pagination').hidden = false;";
+    }
+}else{
+    echo "<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('modalMessage').innerText = 'Lỗi, không thể lấy dữ liệu, vui lòng quay lại sau một ít thời gian';
+            $('#notificationModal').modal('show');
+            $('#notificationModal').on('hidden.bs.modal', function () {
+                window.location.href = '/PHP_Nhom3/index.php?controller=HomeController';
+            });
+        });
+    </script>";
 }
 require_once __DIR__ . '/../views/pages/studentTourHistory.php';
 ?>

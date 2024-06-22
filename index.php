@@ -69,6 +69,10 @@ session_start();
                 require_once('controllers/StudentTourHistoryController.php');
                 break;
             }
+            case 'StudentRegisterTourController':{
+                require_once('controllers/StudentRegisterTourController.php');
+                break;
+            }
             default:{
                 require_once('controllers/LoginController.php');
                 break;

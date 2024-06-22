@@ -49,8 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         document.getElementById('modalMessage').innerText = 'Cập nhật thông tin thành công';
                         $('#notificationModal').modal('show');
                         $('#notificationModal').on('hidden.bs.modal', function () {
-                        // Sau khi modal được đóng, thực hiện redirect
-                        window.location.href = '/PHP_Nhom3/index.php?controller=StudentChangeInforController';
+                            window.location.href = '/PHP_Nhom3/index.php?controller=StudentChangeInforController';
                         });
                     });
                 </script>";

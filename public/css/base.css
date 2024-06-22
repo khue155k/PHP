@@ -25,7 +25,7 @@ body{
     display: none !important;
 }
 .flex-grow-1 {
-    flex-grow: 1;
+    flex-grow: 1 !important;
 }
 .pad-20-0{
     padding: 20px 0 !important;
@@ -66,6 +66,7 @@ body{
     background-color: #157347;
     color: #fff;
     margin: 8px 0;
+    white-space: nowrap;
 }
 .dp-block{
     display: block;
