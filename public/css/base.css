@@ -65,4 +65,46 @@ body{
 .showData{
     background-color: #157347;
     color: #fff;
+    margin: 8px 0;
+}
+.dp-block{
+    display: block;
+    margin: 8px 0;
+    width: 100%;
+}
+
+.list-infor{
+    margin: 0;
+    list-style: none;
+    padding: 0;
+    margin-bottom: 28px;
+}
+.list-infor li{
+    padding: 6px 0;
+    color:darkblue;
+}
+
+.list-infor li b{
+    padding: 6px 0;
+    color: #000;
+    font-weight: 500;
+    font-style: italic;
+}
+.text-center{
+    text-align: center;
+}
+.form-inline{
+    display: inline-block;
+}
+.w-10 {
+    width: 10%;
+}
+.w-20 {
+    width: 20%;
+}
+.w-30 {
+    width: 30%;
+}
+.w-25 {
+    width: 25%;
 }

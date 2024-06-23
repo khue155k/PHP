@@ -3,14 +3,14 @@
     bottom: 0;
     box-sizing: border-box;
 }
-.admin-home{
+.home{
     display: flex;
     justify-content: space-between;
 }
-.admin-home-left{
+.home-left{
     width: 250px;
 }
-.admin-home-right{
+.home-right{
     flex-grow: 1;
     padding: 0 12px;
 }
@@ -27,15 +27,10 @@
     border-radius: 12px;
     height: 120px;
     margin: 20px 12px;
-}
-.card-item a{
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   width: 100%;
-   height: max-content;
-   text-decoration: none;
-   color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
 }
 .card-item .card-item-content{
     width: 60%;
@@ -71,7 +66,7 @@
 {
     background-color: #0095db;
 }
-.admin-title{
+.title{
     text-align: center;
     margin: 20px 0;
     font-size: 30px;
