@@ -90,16 +90,48 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $companyId = $_POST["companyId"];
             $teacherId = $_POST["teacherId"];
             // đã check null trong file css nên kt trc khi post là ko cần thiết 
+            // check startDate
+            $today = date('Y-m-d');
+
+            $diff = strtotime($startDate) - strtotime($today);
+            $days = floor($diff / (60 * 60 * 24));
             $checkCodeSql = "SELECT * FROM tour WHERE code = '$code'";
             $checkCodeResult = mysqli_query($conn, $checkCodeSql);
+            // check giáo viên đã tham gia vào chuyến tham quan nào khác chưa 
+            $checkTeacherAvailableSql = "SELECT `teacher`.`teacherID`, `tour`.`startDate`, `teacher`.`fullName`
+                                            FROM `teacher` 
+                                                LEFT JOIN `tour` ON `tour`.`teacherID` = `teacher`.`teacherID`
+                                                WHERE tour.startDate = '$startDate' AND teacher.teacherID = '$teacherId' ";
+            $checkTeacherAvailable = mysqli_query($conn, $checkTeacherAvailableSql);
             if (mysqli_num_rows($checkCodeResult) > 0) {
                 echo "<script>
                         document.addEventListener('DOMContentLoaded', function() {
-                            document.getElementById('modalMessage').innerText = 'Mã chuyến tham quan đã tồn tại';
+                            document.getElementById('modalMessage').innerText = 'Mã chuyến tham quan $code đã tồn tại';
                             $('#notificationModal').modal('show');
                         });
                     </script>";
-            } else {
+            } 
+            else if(mysqli_num_rows($checkTeacherAvailable) > 0){
+                while ($row = mysqli_fetch_assoc($checkTeacherAvailable)) {
+                    $teacherName = $row['fullName'];
+            
+                }
+                    echo "<script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            document.getElementById('modalMessage').innerText = 'Cán bộ $teacherName trường đã tham gia chuyến tham quan khác vào ngày $startDate, tạo chuyến tham quan không thành công';
+                            $('#notificationModal').modal('show');
+                        });
+                    </script>";
+                }
+                else if ($days < 7) {
+                    echo "<script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            document.getElementById('modalMessage').innerText = 'Chuyến tham quan cần có ngày khởi hành sau ít nhất 1 tuần nữa,ngày $startDate không thỏa mãn ';
+                            $('#notificationModal').modal('show');
+                        });
+                    </script>";
+                }
+            else {
                 $createTourSql = "INSERT INTO `tour`( `code`, `name`, `description`,
                         `startDate`, `presentator`, `availables`, `companyID`, `teacherID`) 
                             VALUES ('$code','$tourName','$description',
@@ -147,30 +179,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $availables = $_POST["availables"];
             $companyId = $_POST["companyId"];
             $teacherId = $_POST["teacherId"];
-            // đã check null trong file css nên kt trc khi post là ko cần thiết 
+            // đã check null trong file css nên kt trc khi post là ko cần thiết
             $updateTourSql = "UPDATE `tour` SET `code` = '$code',
                                 `name` = '$tourName', `description` = '$description',
                                 `startDate` = '$startDate', `presentator` = '$presentator',
                                 `availables` = '$availables', `companyId` = '$companyId',
                                 `teacherId` = '$teacherId' WHERE `tour`.`tourID` = $updateId";
-            if (!mysqli_query($conn, $updateTourSql)) {
-                $errorMessage = mysqli_real_escape_string($conn, mysqli_error($conn));
+            // check startDate
+            $today = date('Y-m-d');
+            $diff = strtotime($startDate) - strtotime($today);
+            $days = floor($diff / (60 * 60 * 24)); 
+            if ($days < 7) {
                 echo "<script>
                     document.addEventListener('DOMContentLoaded', function() {
-                        document.getElementById('modalMessage').innerText = 'Cập nhật chuyến đi thất bại: $errorMessage';
-                            $('#notificationModal').modal('show');
-                            });
-                    s</script>";
-            } else {
-                echo "<script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        document.getElementById('modalMessage').innerText = 'Cập nhật chuyến đi thành công';
+                        document.getElementById('modalMessage').innerText = 'Chuyến tham quan cần có ngày khởi hành sau ít nhất 1 tuần nữa,ngày $startDate không thỏa mãn ';
                         $('#notificationModal').modal('show');
-                        setTimeout(function(){
-                            window.location.href = '/PHP_Nhom3/index.php?controller=TourController';
-                        }, 2000);
                     });
-                    </script>";
+                </script>";
+            }else{
+                if (!mysqli_query($conn, $updateTourSql)) {
+                    $errorMessage = mysqli_real_escape_string($conn, mysqli_error($conn));
+                    echo "<script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            document.getElementById('modalMessage').innerText = 'Cập nhật chuyến đi thất bại: $errorMessage';
+                                $('#notificationModal').modal('show');
+                                });
+                        s</script>";
+                } else {
+                    echo "<script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            document.getElementById('modalMessage').innerText = 'Cập nhật chuyến đi thành công';
+                            $('#notificationModal').modal('show');
+                            setTimeout(function(){
+                                window.location.href = '/PHP_Nhom3/index.php?controller=TourController';
+                            }, 2000);
+                        });
+                        </script>";
+                }
             }
         }
     }
