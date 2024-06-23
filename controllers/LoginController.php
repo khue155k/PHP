@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             header("Location: /PHP_Nhom3/index.php?controller=HomeController");
                             break;
                         case 'Tài khoản giáo viên':
-                            header("Location: /PHP_Nhom3/index.php?controller=HomeController");
+                            header("Location: /PHP_Nhom3/index.php?controller=TeacherHomeController");
                             break;
                         case 'Toàn quyền hệ thống':
                             $_SESSION['checkRegularAmin'] = false;;
@@ -44,9 +44,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                 } 
             } else {
-                echo "<script>";
-                echo "alert('Sai tên đăng nhập hoặc mật khẩu')";
-                echo "</script>";
+                echo "<script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        document.getElementById('modalMessage').innerText = 'Tên đăng nhập hoặc mật khẩu không đúng';
+                        $('#notificationModal').modal('show');
+                    });
+                    </script>";
             }
         }
     }

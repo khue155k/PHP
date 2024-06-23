@@ -5,7 +5,8 @@ $row = mysqli_fetch_assoc($pagination);
 $total_records = $row['total'];
 
 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-$limit = 10;
+
+$limit = 5;
 $total_page = ceil($total_records / $limit);
 
 if ($current_page > $total_page) $current_page = $total_page;
@@ -18,9 +19,10 @@ $dataTourSql = "SELECT `tour`.`tourID`, `tour`.`code`, `tour`.`name` as tourName
     `tour`.`description`, `tour`.`startDate`, `tour`.`presentator`, `tour`.`availables`,
     `company`.`name` as companyName, `teacher`.`fullName`, `company`.`companyID`, `teacher`.`teacherID`
     FROM `tour` 
-        LEFT JOIN `company` ON `tour`.`companyID` = `company`.`companyID` 
-        LEFT JOIN `teacher` ON `tour`.`teacherID` = `teacher`.`teacherID`
-        LIMIT $start, $limit";
+    LEFT JOIN `company` ON `tour`.`companyID` = `company`.`companyID` 
+    LEFT JOIN `teacher` ON `tour`.`teacherID` = `teacher`.`teacherID`
+    LIMIT $start, $limit";
+
 $dataTour = mysqli_query($conn, $dataTourSql);
 // đưa code logic ifelse mysqli_num_rows($dataTour) về đây 
 
@@ -92,11 +94,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $checkCodeResult = mysqli_query($conn, $checkCodeSql);
             if (mysqli_num_rows($checkCodeResult) > 0) {
                 echo "<script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    document.getElementById('modalMessage').innerText = 'Mã chuyến tham quan đã tồn tại';
-                                    $('#notificationModal').modal('show');
-                                });
-                              </script>";
+                        document.addEventListener('DOMContentLoaded', function() {
+                            document.getElementById('modalMessage').innerText = 'Mã chuyến tham quan đã tồn tại';
+                            $('#notificationModal').modal('show');
+                        });
+                    </script>";
             } else {
                 $createTourSql = "INSERT INTO `tour`( `code`, `name`, `description`,
                         `startDate`, `presentator`, `availables`, `companyID`, `teacherID`) 
@@ -105,21 +107,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (!mysqli_query($conn, $createTourSql)) {
                     $errorMessage = mysqli_real_escape_string($conn, mysqli_error($conn));
                     echo "<script>
-                                    document.addEventListener('DOMContentLoaded', function() {
-                                        document.getElementById('modalMessage').innerText = 'Tạo chuyến tham quan thất bại: $errorMessage';
-                                        $('#notificationModal').modal('show');
-                                    });
-                                  </script>";
+                            document.addEventListener('DOMContentLoaded', function() {
+                                document.getElementById('modalMessage').innerText = 'Tạo chuyến tham quan thất bại: $errorMessage';
+                                $('#notificationModal').modal('show');
+                            });
+                            </script>";
                 } else {
                     echo "<script>
-                                    document.addEventListener('DOMContentLoaded', function() {
-                                        document.getElementById('modalMessage').innerText = 'Tạo chuyến tham quan thành công';
-                                        $('#notificationModal').modal('show');
-                                        setTimeout(function(){
-                                            window.location.href = '/PHP_Nhom3/index.php?controller=TourController';
-                                        }, 2000);
-                                    });
-                                  </script>";
+                            document.addEventListener('DOMContentLoaded', function() {
+                                document.getElementById('modalMessage').innerText = 'Tạo chuyến tham quan thành công';
+                                $('#notificationModal').modal('show');
+                                setTimeout(function(){
+                                    window.location.href = '/PHP_Nhom3/index.php?controller=TourController';
+                                }, 2000);
+                            });
+                        </script>";
                 }
 
             }
@@ -183,25 +185,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $deleteSql = "DELETE FROM tour WHERE tourID = '$deleteId'";
         if (mysqli_query($conn, $deleteSql)) {
             echo "<script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    document.getElementById('modalMessage').innerText = 'Tour đã được xóa thành công';
-                                    $('#notificationModal').modal('show');
-                                    setTimeout(function(){
-                                        window.location.href = '/PHP_Nhom3/index.php?controller=TourController';
-                                    }, 2000);
-                                });
-                            </script>";
+                        document.addEventListener('DOMContentLoaded', function() {
+                            document.getElementById('modalMessage').innerText = 'Tour đã được xóa thành công';
+                            $('#notificationModal').modal('show');
+                            setTimeout(function(){
+                                window.location.href = '/PHP_Nhom3/index.php?controller=TourController';
+                            }, 2000);
+                        });
+                    </script>";
         } else {
             $errorMessage = mysqli_real_escape_string($conn, mysqli_error($conn));
             echo "<script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    document.getElementById('modalMessage').innerText = 'Xóa tour thất bại: $errorMessage';
-                                    $('#notificationModal').modal('show');
-                                    setTimeout(function(){
-                                        window.location.href = '/PHP_Nhom3/index.php?controller=TourController';
-                                    }, 2000);
-                                });
-                            </script>";
+                    document.addEventListener('DOMContentLoaded', function() {
+                        document.getElementById('modalMessage').innerText = 'Xóa tour thất bại: $errorMessage';
+                        $('#notificationModal').modal('show');
+                        setTimeout(function(){
+                            window.location.href = '/PHP_Nhom3/index.php?controller=TourController';
+                        }, 2000);
+                    });
+                </script>";
         }
     }
 }
