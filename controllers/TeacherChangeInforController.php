@@ -1,6 +1,6 @@
 <?php
 $accountId = (isset($_SESSION["accountIdNow"]) && $_SESSION["accountIdNow"]) ? $_SESSION["accountIdNow"] : -1;
-$getCurrentUserInfor = "SELECT * FROM student WHERE accountID = $accountId";
+$getCurrentUserInfor = "SELECT * FROM teacher WHERE accountID = $accountId";
 $curentUserInfor = mysqli_query($conn, $getCurrentUserInfor);
 if ($curentUserInfor && mysqli_num_rows($curentUserInfor) > 0) {
     $row = mysqli_fetch_assoc($curentUserInfor);
@@ -31,7 +31,7 @@ if ($curentUserInfor && mysqli_num_rows($curentUserInfor) > 0) {
             $newBirthDate = $_POST['birthDate'];
             $newPhoneNumber = $_POST['phoneNumber'];
             $newEmail = $_POST['email'];
-            $changeInforSql = "UPDATE student SET fullName = '$newFullName', gender = '$newGender', birthDate = '$newBirthDate', phoneNumber = '$newPhoneNumber', email = '$newEmail' WHERE code = '$code' AND accountID = $accountId";
+            $changeInforSql = "UPDATE teacher SET fullName = '$newFullName', gender = '$newGender', birthDate = '$newBirthDate', phoneNumber = '$newPhoneNumber', email = '$newEmail' WHERE code = '$code' AND accountID = $accountId";
             $data = mysqli_query($conn, $changeInforSql);
             if ($data) {
                 echo "<script>
@@ -39,7 +39,7 @@ if ($curentUserInfor && mysqli_num_rows($curentUserInfor) > 0) {
                             document.getElementById('modalMessage').innerText = 'Cập nhật thông tin thành công';
                             $('#notificationModal').modal('show');
                             $('#notificationModal').on('hidden.bs.modal', function () {
-                                window.location.href = '/PHP_Nhom3/index.php?controller=StudentChangeInforController';
+                                window.location.href = '/PHP_Nhom3/index.php?controller=TeacherChangeInforController';
                             });
                         });
                     </script>";
@@ -62,5 +62,4 @@ if ($curentUserInfor && mysqli_num_rows($curentUserInfor) > 0) {
         </script>";
     header("Location: /PHP_Nhom3/index.php?controller=HomeController");
 }
-
-require_once __DIR__ . '/../views/pages/studentChangeInfor.php';
+require_once __DIR__ . '/../views/pages/teacherChangeInfor.php';
