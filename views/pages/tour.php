@@ -120,7 +120,8 @@
                                         echo "<td>" . $row['code'] . "</td>";
                                         echo "<td>" . $row['tourName'] . "</td>";
                                         echo "<td>" . $row['description'] . "</td>";
-                                        echo "<td>" . $row['startDate'] . "</td>";
+                                        // echo "<td>" . $row['startDate'] . "</td>";
+                                        echo "<td>" . date("d/m/Y", strtotime($row['startDate'])) . "</td>";
                                         echo "<td>" . $row['presentator'] . "</td>";
                                         echo "<td>" . $row['availables'] . "</td>";
                                         echo "<td id='" . $row['companyID'] . "'>" . $row['companyName'] . "</td>";
@@ -129,12 +130,16 @@
                                         echo "<td>
                                                     <button class='update update-tour dp-block'>Sửa</button>
                                                     <button class='delete delete-tour dp-block'>Xóa</button>
+                                                    <form method='POST'>
+                                                    <input type='hidden' name='tourID' value='" . $row['tourID'] . "'>
+                                                    <button type='submit' class='showData dp-block' name='showData'>Xem danh sách tham gia</button>
+                                                </form>
                                                 </td>";
                                         echo "</tr>";
                                     }
                                 } else {
                                     echo "<tr>";
-                                    echo "<td colspan='5' class='text-center'>Không chuyến tham quan nào</td>";
+                                    echo "<td colspan='5' class='text-center'>Không có chuyến tham quan nào</td>";
                                     echo "</tr>";
                                 }
                                 ?>
@@ -161,7 +166,79 @@
                     </div>
                 </div>
             </div>
+            <div class="container pad-0-28" id="showData" hidden>
+                <div class="flex-sb-center pad-20-0">
+                    <h1 class="h1-title">Danh sách sinh viên tham gia chuyến tham quan</h1>
+                    <button type="button" class="btn btn-primary" id="showListTours">Xem danh sách chuyến tham quan</button>
+                </div>
 
+                <div class="container-body">
+                    <div class="container-table">
+                        <?php
+                        if (isset($dataTourSelected)) {
+                            mysqli_num_rows($dataTourSelected);
+                            $row = mysqli_fetch_assoc($dataTourSelected);
+                            echo "
+                            <ul class='list-infor'>
+                                <h5>Thông tin chuyến tham quan</h5>
+                                <li>Mã chuyến tham quan: <b>" . $row['code'] . "</b></li>
+                                <li>Tên chuyến tham quan: <b>" . $row['tourName'] . "</b></li>
+                                <li>Ngày tổ chức: <b>" . date("d/m/Y", strtotime($row['startDate'])) . "</b></li>
+                                <li>Người thuyết trình - chịu trách nhiệm: <b>" . $row['presentator'] . "</b></li>
+                                <li>Số lượng tối đa: <b>" . $row['availables'] . "</b></li>
+                                <li>Mô tả: <b>" . $row['description'] . "</b></li>
+                                <hr>
+                                <li>Thông tin Doanh nghiệp:</li>
+                                <li>Tên doanh nghiệp: <b>" . $row['companyName'] . "</b></li>
+                                <li>Mã doanh nghiệp: <b>" . $row['companyCode'] . "</b></li>
+                                <hr>
+                                <li>Thông tin Cán bộ phụ trách:</li>
+                                <li>Tên cán bộ: <b>" . $row['fullName'] . "</b></li>
+                                <li>Số điện thoại: <b>" . $row['phoneNumber'] . "</b></li>
+                            </ul>";
+                        }
+                        ?>
+                        <table class="table table-borderless table-hover table-bordered">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col">STT</th>
+                                    <th scope="col">Mã sinh viên</th>
+                                    <th scope="col">Tên sinh viên</th>
+                                    <th scope="col">Địa chỉ</th>
+                                    <th scope="col">Số điện thoại</th>
+                                    <th scope="col">Lớp học</th>
+                                    <th scope="col">Điểm đánh giá</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if (isset($dataStudentTour)) {
+                                    if (mysqli_num_rows($dataStudentTour) > 0) {
+                                        $i = 0;
+                                        while ($row = mysqli_fetch_assoc($dataStudentTour)) {
+                                            $i += 1;
+                                            echo "<tr>";
+                                            echo "<th scope='row'>" . $i . "</th>";
+                                            echo "<td>" . $row['code'] . "</td>";
+                                            echo "<td>" . $row['fullName'] . "</td>";
+                                            echo "<td>" . $row['address'] . "</td>";
+                                            echo "<td>" . $row['phoneNumber'] . "</td>";
+                                            echo "<td>" . $row['classCode'] . "</td>";
+                                            echo "<td>" . $row['rate'] . "</td>";
+                                            echo "</tr>";
+                                        }
+                                    } else {
+                                        echo "<tr>";
+                                        echo "<td colspan='9'> Chuyến tham quan chưa có sinh viên nào tham gia</td>";
+                                        echo "</tr>";
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- modal update -->
@@ -263,6 +340,13 @@
         </div>
     </div>
     <script>
+
+<?php echo $scriptShowData ?>
+    document.getElementById('showListTours').addEventListener('click', function() {
+        document.getElementById('listTour').hidden = false;
+        document.getElementById('showData').hidden = true;
+    });
+
     $(document).ready(function() {
         $('.update-tour').on('click', function() {
             $('#updateTour').modal('show');
