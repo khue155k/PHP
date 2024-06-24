@@ -180,7 +180,8 @@
                             $row = mysqli_fetch_assoc($dataTourSelected);
                             echo "
                             <ul class='list-infor'>
-                                <h5>Thông tin chuyến tham quan</h5>
+                            <hr>
+                                <h5><b>Thông tin chuyến tham quan</b></h5>
                                 <li>Mã chuyến tham quan: <b>" . $row['code'] . "</b></li>
                                 <li>Tên chuyến tham quan: <b>" . $row['tourName'] . "</b></li>
                                 <li>Ngày tổ chức: <b>" . date("d/m/Y", strtotime($row['startDate'])) . "</b></li>
@@ -188,11 +189,11 @@
                                 <li>Số lượng tối đa: <b>" . $row['availables'] . "</b></li>
                                 <li>Mô tả: <b>" . $row['description'] . "</b></li>
                                 <hr>
-                                <li>Thông tin Doanh nghiệp:</li>
+                                <li><b> Thông tin Doanh nghiệp</b></li>
                                 <li>Tên doanh nghiệp: <b>" . $row['companyName'] . "</b></li>
                                 <li>Mã doanh nghiệp: <b>" . $row['companyCode'] . "</b></li>
                                 <hr>
-                                <li>Thông tin Cán bộ phụ trách:</li>
+                                <li><b>Thông tin Cán bộ phụ trách</b></li>
                                 <li>Tên cán bộ: <b>" . $row['fullName'] . "</b></li>
                                 <li>Số điện thoại: <b>" . $row['phoneNumber'] . "</b></li>
                             </ul>";
@@ -255,7 +256,7 @@
                         <input required type="hidden" name="tourID" id="tourID">
                         <div class="mb-3">
                             <label for="code" class="col-form-label">Mã Chuyến tham quan:</label>
-                            <input required type="text" class="form-control" name="code" id="code">
+                            <input required type="text" class="form-control" name="code" id="code" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="tourName" class="col-form-label">Tên chương trình: </label>
