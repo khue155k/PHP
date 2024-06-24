@@ -21,11 +21,17 @@ body{
     display: flex;
     justify-content: space-between;
 }
+.table{
+    width: 100% !important;
+}
+.container{
+    width: 100% !important;
+}
 .hiddenId{
     display: none !important;
 }
 .flex-grow-1 {
-    flex-grow: 1;
+    flex-grow: 1 !important;
 }
 .pad-20-0{
     padding: 20px 0 !important;
@@ -46,7 +52,9 @@ body{
     border: none;
     font-size: 14px;
 }
-
+th, td {
+    vertical-align: middle !important;
+}
 .delete{
     color: #fff;
     background-color: #dc3545;
@@ -66,11 +74,13 @@ body{
     background-color: #157347;
     color: #fff;
     margin: 8px 0;
+    white-space: nowrap;
 }
 .dp-block{
     display: block;
     margin: 8px 0;
     width: 100%;
+    white-space: nowrap;
 }
 
 .list-infor{
@@ -107,4 +117,26 @@ body{
 }
 .w-25 {
     width: 25%;
+}
+.pagination{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-top: 24px !important;
+}
+.page-item{
+    display: inline-block !important;
+    padding: 8px 16px !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    color: #000 !important;
+}
+.page-item:hover{
+    color: blue !important;
+    text-decoration: underline !important;
+}
+.page-active{
+    background-color: cornflowerblue !important;
+    color: #fff !important;
+    border-radius: 4px !important;
 }

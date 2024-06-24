@@ -5,7 +5,7 @@ $row = mysqli_fetch_assoc($pagination);
 $total_records = $row['total'];
 
 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-$limit = 10;
+$limit = 3;
 $total_page = ceil($total_records / $limit);
 
 if ($current_page > $total_page) $current_page = $total_page;
