@@ -28,17 +28,20 @@
             <div class="container pad-0-28" id="listStudents">
                 <div class="flex-sb-center pad-20-0">
                     <h1 class="h1-title">Danh sách sinh viên</h1>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createStudent">Thêm sinh viên</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#createStudent">Thêm sinh viên</button>
                 </div>
 
                 <!-- modal create -->
-                <div class="modal fade" id="createStudent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="createStudent" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-body">
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm sinh viên</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                                 </div>
                                 <br>
                                 <form method="POST">
@@ -82,8 +85,10 @@
                                     </div>
                                     <br>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                                        <button type="submit" class="btn btn-primary" name="createStudent">Thêm sinh viên</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Hủy</button>
+                                        <button type="submit" class="btn btn-primary" name="createStudent">Thêm sinh
+                                            viên</button>
                                     </div>
                                 </form>
                             </div>
@@ -141,6 +146,24 @@
                                 ?>
                             </tbody>
                         </table>
+                        <div class="pagination">
+                            <?php
+                            if ($current_page > 1 && $total_page > 1) {
+                                echo '<a class="page-item" href="index.php?controller=StudentController&page=' . ($current_page - 1) . '">Prev</a>';
+                            }
+                            for ($i = 1; $i <= $total_page; $i++) {
+                                if ($i == $current_page) {
+                                    echo '<span class=" page-item page-active">' . $i . '</span>';
+                                } else {
+                                    echo '<a class="page-item" href="index.php?controller=StudentController&page=' . $i . '">' . $i . '</a> ';
+                                }
+                            }
+
+                            if ($current_page < $total_page && $total_page > 1) {
+                                echo '<a class="page-item" href="index.php?controller=StudentController&page=' . ($current_page + 1) . '">Next</a>';
+                            }
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -218,7 +241,8 @@
     </div>
 
     <!-- modal update -->
-    <div class="modal fade" id="updateStudentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="updateStudentModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
@@ -279,7 +303,8 @@
     </div>
 
     <!-- modal delete -->
-    <div class="modal fade" id="deleteStudentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteStudentModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
@@ -302,7 +327,8 @@
     </div>
 
     <!-- modal thông báo -->
-    <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+    <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -317,39 +343,39 @@
         </div>
     </div>
     <script>
-        <?php echo $scriptShowData ?>
-        document.getElementById('showListStudents').addEventListener('click', function() {
-            document.getElementById('listStudents').hidden = false;
-            document.getElementById('showData').hidden = true;
-        });
+    <?php echo $scriptShowData ?>
+    document.getElementById('showListStudents').addEventListener('click', function() {
+        document.getElementById('listStudents').hidden = false;
+        document.getElementById('showData').hidden = true;
+    });
 
-        $(document).ready(function() {
-            $('.updateStudent').on('click', function() {
-                $('#updateStudentModal').modal('show');
-                $tr = $(this).closest('tr');
-                let data = $tr.children("td").map(function() {
-                    return $(this).text();
-                }).get();
-                $('#studentID').val(data[0]);
-                $('#code').val(data[1]);
-                $('#fullName').val(data[2]);
-                $('#gender').val(data[3]);
-                $('#birthDate').val(data[4]);
-                $('#address').val(data[5]);
-                $('#phoneNumber').val(data[6]);
-                $('#email').val(data[7]);
-                var classId = $(this).closest('tr').find('td[id]').attr('id');
-                $('#classID').val(classId);
-            });
-            $('.deleteStudent').on('click', function() {
-                $('#deleteStudentModal').modal('show');
-                $tr = $(this).closest('tr');
-                let data = $tr.children("td").map(function() {
-                    return $(this).text();
-                }).get();
-                $('#deleteID').val(data[0]);
-            });
+    $(document).ready(function() {
+        $('.updateStudent').on('click', function() {
+            $('#updateStudentModal').modal('show');
+            $tr = $(this).closest('tr');
+            let data = $tr.children("td").map(function() {
+                return $(this).text();
+            }).get();
+            $('#studentID').val(data[0]);
+            $('#code').val(data[1]);
+            $('#fullName').val(data[2]);
+            $('#gender').val(data[3]);
+            $('#birthDate').val(data[4]);
+            $('#address').val(data[5]);
+            $('#phoneNumber').val(data[6]);
+            $('#email').val(data[7]);
+            var classId = $(this).closest('tr').find('td[id]').attr('id');
+            $('#classID').val(classId);
         });
+        $('.deleteStudent').on('click', function() {
+            $('#deleteStudentModal').modal('show');
+            $tr = $(this).closest('tr');
+            let data = $tr.children("td").map(function() {
+                return $(this).text();
+            }).get();
+            $('#deleteID').val(data[0]);
+        });
+    });
     </script>
 </body>
 

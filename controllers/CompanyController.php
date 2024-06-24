@@ -117,46 +117,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $checkCompanyResult = mysqli_query($conn, $checkCompanySql);
         $createCompanySql = "UPDATE company SET name = '$name', description = '$description',email = '$email', phoneNumber = '$phoneNumber', address = '$address'
                                 WHERE companyID = $companyID";
+        if (!mysqli_query($conn, $createCompanySql)) {
+            $errorMessage = mysqli_real_escape_string($conn, mysqli_error($conn));
+            echo "<script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        document.getElementById('modalMessage').innerText = 'Sửa doanh nghiệp thất bại: $errorMessage';
+                            $('#notificationModal').modal('show');
+                        });
+                    </script>";
+        } else {
+            echo "<script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                         document.getElementById('modalMessage').innerText = 'Sửa doanh nghiệp thành công';
+                        $('#notificationModal').modal('show');
+                        setTimeout(function(){
+                            window.location.href = '/PHP_Nhom3/index.php?controller=CompanyController';
+                        }, 2000);
+                    });
+                </script>";
+        }
         // if (!mysqli_query($conn, $createCompanySql)) {
         //     $errorMessage = mysqli_real_escape_string($conn, mysqli_error($conn));
         //     echo "<script>
         //             document.addEventListener('DOMContentLoaded', function() {
-        //                 document.getElementById('modalMessage').innerText = 'Sửa doanh nghiệp thất bại: $errorMessage';
+        //                 document.getElementById('modalMessage').innerText = 'Sửa sinh viên thất bại: $errorMessage';
         //                     $('#notificationModal').modal('show');
         //                 });
         //             </script>";
+            
         // } else {
         //     echo "<script>
         //             document.addEventListener('DOMContentLoaded', function() {
-        //                  document.getElementById('modalMessage').innerText = 'Sửa doanh nghiệp thành công';
+        //                  document.getElementById('modalMessage').innerText = 'Sửa sinh viên thành công';
         //                 $('#notificationModal').modal('show');
         //                 setTimeout(function(){
         //                     window.location.href = '/PHP_Nhom3/index.php?controller=CompanyController';
         //                 }, 2000);
         //             });
         //         </script>";
-        // }
-        if (!mysqli_query($conn, $createCompanySql)) {
-            $errorMessage = mysqli_real_escape_string($conn, mysqli_error($conn));
-            echo "<script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        document.getElementById('modalMessage').innerText = 'Sửa sinh viên thất bại: $errorMessage';
-                            $('#notificationModal').modal('show');
-                        });
-                    </script>";
-            
-        } else {
-            echo "<script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                         document.getElementById('modalMessage').innerText = 'Sửa sinh viên thành công';
-                        $('#notificationModal').modal('show');
-                        setTimeout(function(){
-                            window.location.href = '/PHP_Nhom3/index.php?controller=StudentController';
-                        }, 2000);
-                    });
-                </script>";
                 
-        }
+        // }
     }
 }
 
@@ -173,7 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $errorMessage = mysqli_real_escape_string($conn, mysqli_error($conn));
             echo "<script>
                         document.addEventListener('DOMContentLoaded', function() {
-                            document.getElementById('modalMessage').innerText = 'Xóa tài khoản thất bại: $errorMessage';
+                            document.getElementById('modalMessage').innerText = 'Xóa doanh nghiệp thất bại: $errorMessage';
                             $('#notificationModal').modal('show');
                             setTimeout(function(){
                                 window.location.href = '/PHP_Nhom3/index.php?controller=CompanyController';
@@ -183,7 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             echo "<script>
                         document.addEventListener('DOMContentLoaded', function() {
-                            document.getElementById('modalMessage').innerText = 'Tài khoản đã được xóa thành công';
+                            document.getElementById('modalMessage').innerText = 'Doanh nghiệp đã được xóa thành công';
                             $('#notificationModal').modal('show');
                             setTimeout(function(){
                                 window.location.href = '/PHP_Nhom3/index.php?controller=CompanyController';

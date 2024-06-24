@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="password" class="col-form-label">Mật khẩu:</label>
-                                        <input required type="text" class="form-control" name="password">
+                                        <input required type="password" class="form-control" name="password">
                                     </div>
                                     <div class="mb-3">
                                         <label for="role" class="col-form-label">Vai trò:</label>
@@ -112,6 +112,24 @@
                                 ?>
                             </tbody>
                         </table>
+                        <div class="pagination">
+                            <?php
+                            if ($current_page > 1 && $total_page > 1) {
+                                echo '<a class="page-item" href="index.php?controller=AccountController&page=' . ($current_page - 1) . '">Prev</a>';
+                            }
+                            for ($i = 1; $i <= $total_page; $i++) {
+                                if ($i == $current_page) {
+                                    echo '<span class="page-item page-active">' . $i . '</span>';
+                                } else {
+                                    echo '<a class="page-item" href="index.php?controller=AccountController&page=' . $i . '">' . $i . '</a>';
+                                }
+                            }
+
+                            if ($current_page < $total_page && $total_page > 1) {
+                                echo '<a class="page-item" href="index.php?controller=AccountController&page=' . ($current_page + 1) . '">Next</a>';
+                            }
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -136,7 +154,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="password" class="col-form-label">Mật khẩu:</label>
-                            <input required type="text" class="form-control" name="password" id="password">
+                            <input required type="password" class="form-control" name="password" id="password">
                         </div>
                         <div class="mb-3">
                             <label for="role" class="col-form-label">Vai trò:</label>
