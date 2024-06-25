@@ -59,7 +59,7 @@
                     <h2 class="h2">Thông tin cá nhân</h2>
                     <form method="POST">
                         <div class="mb-3">
-                            <label for="code" class="col-form-label">Mã sinh viên:<span class="span">*</span></label>
+                            <label for="code" class="col-form-label">Mã giáo viên:<span class="span">*</span></label>
                             <input disabled type="text" class="form-control" name="code" value="<?php echo $code; ?>">
                         </div>
                         <div class="mb-3">
