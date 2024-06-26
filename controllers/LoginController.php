@@ -25,17 +25,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION["accountIdNow"] = $row['accountID'];
                     switch ($row["role"]) {
                         case 'Tài khoản sinh viên':
+                            $_SESSION['role'] = 2;
                             header("Location: /PHP_Nhom3/index.php?controller=HomeController");
                             break;
                         case 'Tài khoản giáo viên':
+                            $_SESSION['role'] = 1;
                             header("Location: /PHP_Nhom3/index.php?controller=TeacherHomeController");
                             break;
                         case 'Toàn quyền hệ thống':
-                            $_SESSION['checkRegularAmin'] = false;;
+                            $_SESSION['checkRegularAmin'] = false;
+                            $_SESSION['role'] = 0;
                             header("Location: /PHP_Nhom3/index.php?controller=AdminController");
                             break;
                         case 'Quản lý thông thường':
                             $_SESSION['checkRegularAmin'] = true;
+                            $_SESSION['role'] = 0;
                             header("Location: /PHP_Nhom3/index.php?controller=AdminController");
                             break;
                         default:
