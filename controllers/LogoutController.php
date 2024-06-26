@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 $_SESSION = array();
 
 if (ini_get("session.use_cookies")) {
@@ -11,5 +11,5 @@ if (ini_get("session.use_cookies")) {
 }
 session_destroy();
 header("Location: /PHP_Nhom3/index.php?controller=LoginController");
-exit;
+//exit;
 ?>
