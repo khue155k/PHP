@@ -197,6 +197,7 @@
                                             echo "<td>" . $row['startDate'] . "</td>";
                                             echo "<td>" . $row['presentator'] . "</td>";
                                             echo "<td>" . $row['availables'] . "</td>";
+                                            echo "<td>" . $row['fullName'] . "</td>";
                                             echo "</tr>";
                                         }
                                     } else {
@@ -227,7 +228,7 @@
                         <input required type="hidden" name="companyID" id="companyID">
                         <div class="mb-3">
                             <label for="code" class="col-form-label">Mã doanh nghiệp:</label>
-                            <input required type="text" class="form-control" name="code" id="code">
+                            <input disabled type="text" class="form-control" name="code" id="code">
                         </div>
                         <div class="mb-3">
                             <label for="classname" class="col-form-label">Tên doanh nghiệp:</label>
