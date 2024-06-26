@@ -57,7 +57,7 @@ session_start();
                     }
             }
         } elseif ($_SESSION['role'] == 1) {
-            $controller = isset($_GET['controller']) ? $_GET['controller'] : 'AdminController';
+            $controller = isset($_GET['controller']) ? $_GET['controller'] : 'TeacherHomeController';
 
             switch ($controller) {
                     //case 'LogoutController':
@@ -78,12 +78,12 @@ session_start();
                         break;
                     }
                 default: {
-                        require_once('controllers/LoginController.php');
+                        require_once('controllers/TeacherHomeController.php');
                         break;
                     }
             }
         } elseif ($_SESSION['role'] == 2) {
-            $controller = isset($_GET['controller']) ? $_GET['controller'] : 'AdminController';
+            $controller = isset($_GET['controller']) ? $_GET['controller'] : 'HomeController';
 
             switch ($controller) {
                     //case 'LogoutController':
@@ -112,7 +112,7 @@ session_start();
                         break;
                     }
                 default: {
-                        require_once('controllers/LoginController.php');
+                        require_once('controllers/HomeController.php');
                         break;
                     }
             }
