@@ -1,15 +1,15 @@
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
--- --https://www.phpmyadmin.net/
+-- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
 -- Thời gian đã tạo: Th6 22, 2024 lúc 06:47 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
---SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
---START TRANSACTION;
---SET time_zone = "+00:00";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -18,26 +18,27 @@
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: 'school_bussiness_tour_management'
+-- Cơ sở dữ liệu: `school_bussiness_tour_management`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng 'account'
+-- Cấu trúc bảng cho bảng `account`
 --
 
-CREATE TABLE account (
-  accountID int(11) NOT NULL,
-  username varchar(100) NOT NULL,
-  password varchar(100) NOT NULL,
-  role varchar(100) NOT NULL
-); 
+CREATE TABLE `account` (
+  `accountID` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `role` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 --
--- Đang đổ dữ liệu cho bảng 'account'
+-- Đang đổ dữ liệu cho bảng `account`
 --
 
-INSERT INTO 'account' ('accountID', 'username', 'password', 'role') VALUES
+INSERT INTO `account` (`accountID`, `username`, `password`, `role`) VALUES
 (1, 'admin', '123', 'Toàn quyền hệ thống'),
 (2, 'normal1', '123', 'Quản lí thông thường'),
 (4, 'SV01', '123', 'Tài khoản sinh viên'),
@@ -86,20 +87,20 @@ INSERT INTO 'account' ('accountID', 'username', 'password', 'role') VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng 'class'
+-- Cấu trúc bảng cho bảng `class`
 --
 
-CREATE TABLE 'class' (
-  'classID' int(11) NOT NULL,
-  'code' varchar(100) NOT NULL,
-  'name' varchar(100) NOT NULL
-) 
+CREATE TABLE `class` (
+  `classID` int(11) NOT NULL,
+  `code` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng 'class'
+-- Đang đổ dữ liệu cho bảng `class`
 --
 
-INSERT INTO 'class' ('classID', 'code', 'name') VALUES
+INSERT INTO `class` (`classID`, `code`, `name`) VALUES
 (1, 'CNTT01', 'Công nghệ thông tin 01'),
 (2, 'CNTT02', 'Công nghệ thông tin 02'),
 (3, 'CNTT03', 'Công nghệ thông tin 03'),
@@ -122,24 +123,24 @@ INSERT INTO 'class' ('classID', 'code', 'name') VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng 'company'
+-- Cấu trúc bảng cho bảng `company`
 --
 
-CREATE TABLE 'company' (
-  'companyID' int(11) NOT NULL,
-  'code' varchar(100) NOT NULL,
-  'name' varchar(100) NOT NULL,
-  'description' varchar(100) NOT NULL,
-  'email' varchar(100) NOT NULL,
-  'phoneNumber' varchar(100) NOT NULL,
-  'address' varchar(100) NOT NULL
+CREATE TABLE `company` (
+  `companyID` int(11) NOT NULL,
+  `code` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `phoneNumber` varchar(100) NOT NULL,
+  `address` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng 'company'
+-- Đang đổ dữ liệu cho bảng `company`
 --
 
-INSERT INTO 'company' ('companyID', 'code', 'name', 'description', 'email', 'phoneNumber', 'address') VALUES
+INSERT INTO `company` (`companyID`, `code`, `name`, `description`, `email`, `phoneNumber`, `address`) VALUES
 (1, 'DN01', 'Viettel', '', 'Viettel@gmail.com', '123456789', 'Hà Nội'),
 (2, 'DN02', 'FPT', '', 'FPT@gmail.com', '123456789', 'Hà Nội'),
 (3, 'DN03', 'VCCorp', '', 'VCCorp@gmail.com', '0321654987', 'Hà Nội'),
@@ -164,27 +165,27 @@ INSERT INTO 'company' ('companyID', 'code', 'name', 'description', 'email', 'pho
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng 'student'
+-- Cấu trúc bảng cho bảng `student`
 --
 
-CREATE TABLE 'student' (
-  'studentID' int(11) NOT NULL,
-  'code' varchar(100) NOT NULL,
-  'fullName' varchar(100) NOT NULL,
-  'gender' varchar(15) NOT NULL,
-  'birthDate' varchar(100) NOT NULL,
-  'address' varchar(100) NOT NULL,
-  'phoneNumber' varchar(100) NOT NULL,
-  'email' varchar(100) NOT NULL,
-  'classID' int(11) DEFAULT NULL,
-  'accountID' int(11) DEFAULT NULL
+CREATE TABLE `student` (
+  `studentID` int(11) NOT NULL,
+  `code` varchar(100) NOT NULL,
+  `fullName` varchar(100) NOT NULL,
+  `gender` varchar(15) NOT NULL,
+  `birthDate` varchar(100) NOT NULL,
+  `address` varchar(100) NOT NULL,
+  `phoneNumber` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `classID` int(11) DEFAULT NULL,
+  `accountID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng 'student'
+-- Đang đổ dữ liệu cho bảng `student`
 --
 
-INSERT INTO 'student' ('studentID', 'code', 'fullName', 'gender', 'birthDate', 'address', 'phoneNumber', 'email', 'classID', 'accountID') VALUES
+INSERT INTO `student` (`studentID`, `code`, `fullName`, `gender`, `birthDate`, `address`, `phoneNumber`, `email`, `classID`, `accountID`) VALUES
 (1, 'SV01', 'Tăng Khánh Linh', 'Nữ', '22/12/2003', 'Hưng Yên', '0987654321', 'khanhlinh@haui.com', 1, 4),
 (2, 'SV02', 'Trương Ngọc Khuê', 'Nam', '15/05/2003', 'Hà Nam', '0123456789', 'khue@gmail.com', 8, 7),
 (3, 'SV03', 'Lê Thị Ngọc Ánh', 'Nữ', '11/10/2003', 'Thanh Hóa', '0125847369', 'anh@gmail.com', 4, 11),
@@ -209,20 +210,20 @@ INSERT INTO 'student' ('studentID', 'code', 'fullName', 'gender', 'birthDate', '
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng 'student_tour'
+-- Cấu trúc bảng cho bảng `student_tour`
 --
 
-CREATE TABLE 'student_tour' (
-  'studentID' int(11) NOT NULL,
-  'tourID' int(11) NOT NULL,
-  'rate' int(11) NOT NULL
+CREATE TABLE `student_tour` (
+  `studentID` int(11) NOT NULL,
+  `tourID` int(11) NOT NULL,
+  `rate` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng 'student_tour'
+-- Đang đổ dữ liệu cho bảng `student_tour`
 --
 
-INSERT INTO 'student_tour' ('studentID', 'tourID', 'rate') VALUES
+INSERT INTO `student_tour` (`studentID`, `tourID`, `rate`) VALUES
 (2, 1, 0),
 (2, 2, 0),
 (2, 3, 0),
@@ -439,26 +440,26 @@ INSERT INTO 'student_tour' ('studentID', 'tourID', 'rate') VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng 'teacher'
+-- Cấu trúc bảng cho bảng `teacher`
 --
 
-CREATE TABLE 'teacher' (
-  'teacherID' int(11) NOT NULL,
-  'code' varchar(100) NOT NULL,
-  'fullName' varchar(100) NOT NULL,
-  'gender' varchar(100) NOT NULL,
-  'birthDate' varchar(100) NOT NULL,
-  'address' varchar(100) NOT NULL,
-  'phoneNumber' varchar(100) NOT NULL,
-  'email' varchar(100) NOT NULL,
-  'accountID' int(11) DEFAULT NULL
+CREATE TABLE `teacher` (
+  `teacherID` int(11) NOT NULL,
+  `code` varchar(100) NOT NULL,
+  `fullName` varchar(100) NOT NULL,
+  `gender` varchar(100) NOT NULL,
+  `birthDate` varchar(100) NOT NULL,
+  `address` varchar(100) NOT NULL,
+  `phoneNumber` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `accountID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng 'teacher'
+-- Đang đổ dữ liệu cho bảng `teacher`
 --
 
-INSERT INTO 'teacher' ('teacherID', 'code', 'fullName', 'gender', 'birthDate', 'address', 'phoneNumber', 'email', 'accountID') VALUES
+INSERT INTO `teacher` (`teacherID`, `code`, `fullName`, `gender`, `birthDate`, `address`, `phoneNumber`, `email`, `accountID`) VALUES
 (1, 'GV01', 'Nguyễn Thị Lan Anh', 'Nữ', '12/06/1988', 'Hà Nội', '0987654321', 'lananh@gmail.com', 5),
 (2, 'GV02', 'Trần Thị Hằng', 'Nữ', '23/02/1986', 'Hà Nam', '0123456988', 'tranhang@gmail.com', 6),
 (3, 'GV03', 'Đỗ Mạnh Quang', 'Nam', '16/05/1998', 'Hà Nội', '0123456898', 'manhquang@gmail.com', 14),
@@ -483,26 +484,26 @@ INSERT INTO 'teacher' ('teacherID', 'code', 'fullName', 'gender', 'birthDate', '
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng 'tour'
+-- Cấu trúc bảng cho bảng `tour`
 --
 
-CREATE TABLE 'tour' (
-  'tourID' int(11) NOT NULL,
-  'code' varchar(100) NOT NULL,
-  'name' varchar(100) NOT NULL,
-  'description' varchar(100) NOT NULL,
-  'startDate' datetime NOT NULL,
-  'presentator' varchar(100) NOT NULL,
-  'availables' int(11) NOT NULL,
-  'companyID' int(11) DEFAULT NULL,
-  'teacherID' int(11) DEFAULT NULL
+CREATE TABLE `tour` (
+  `tourID` int(11) NOT NULL,
+  `code` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  `startDate` datetime NOT NULL,
+  `presentator` varchar(100) NOT NULL,
+  `availables` int(11) NOT NULL,
+  `companyID` int(11) DEFAULT NULL,
+  `teacherID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng 'tour'
+-- Đang đổ dữ liệu cho bảng `tour`
 --
 
-INSERT INTO 'tour' ('tourID', 'code', 'name', 'description', 'startDate', 'presentator', 'availables', 'companyID', 'teacherID') VALUES
+INSERT INTO `tour` (`tourID`, `code`, `name`, `description`, `startDate`, `presentator`, `availables`, `companyID`, `teacherID`) VALUES
 (1, 'T2024IT001', 'Chương trình trải nghiệm thực tế tại Doanh nghiệp Công ty TNHH Công nghiệp Brother Việt Nam năm 2024', 'SV xem xét kế hoạch học tập và đọc kỹ Thông báo tiếp nhận SV trải nghiệm thực tế\r\n\r\n- Tham dự buổi g', '2024-08-07 13:44:34', 'Tổng giám đốc', 150, 9, 18),
 (2, 'T2024IT00110', 'Tham quan KMS Technology', 'Không có', '2024-06-17 20:11:29', 'Quản lý phòng đối ngoại', 80, 13, 17),
 (3, 'T2024IT00119', 'KMS Technology đồng hành cùng khoa Công Nghệ Thông tin trường Đại học Công Nghiệp Hà Nội tổ chức tha', 'SV xem xét kế hoạch học tập và đọc kỹ Thông báo tiếp nhận SV trải nghiệm thực tế', '2024-08-07 13:44:34', 'Tổng giám đốc', 150, 9, 18),
@@ -529,123 +530,123 @@ INSERT INTO 'tour' ('tourID', 'code', 'name', 'description', 'startDate', 'prese
 --
 
 --
--- Chỉ mục cho bảng 'account'
+-- Chỉ mục cho bảng `account`
 --
-ALTER TABLE 'account'
-  ADD PRIMARY KEY ('accountID');
+ALTER TABLE `account`
+  ADD PRIMARY KEY (`accountID`);
 
 --
--- Chỉ mục cho bảng 'class'
+-- Chỉ mục cho bảng `class`
 --
-ALTER TABLE 'class'
-  ADD PRIMARY KEY ('classID');
+ALTER TABLE `class`
+  ADD PRIMARY KEY (`classID`);
 
 --
--- Chỉ mục cho bảng 'company'
+-- Chỉ mục cho bảng `company`
 --
-ALTER TABLE 'company'
-  ADD PRIMARY KEY ('companyID');
+ALTER TABLE `company`
+  ADD PRIMARY KEY (`companyID`);
 
 --
--- Chỉ mục cho bảng 'student'
+-- Chỉ mục cho bảng `student`
 --
-ALTER TABLE 'student'
-  ADD PRIMARY KEY ('studentID'),
-  ADD KEY 'classID' ('classID'),
-  ADD KEY 'accountID' ('accountID');
+ALTER TABLE `student`
+  ADD PRIMARY KEY (`studentID`),
+  ADD KEY `classID` (`classID`),
+  ADD KEY `accountID` (`accountID`);
 
 --
--- Chỉ mục cho bảng 'student_tour'
+-- Chỉ mục cho bảng `student_tour`
 --
-ALTER TABLE 'student_tour'
-  ADD PRIMARY KEY ('studentID','tourID'),
-  ADD KEY 'tourID' ('tourID');
+ALTER TABLE `student_tour`
+  ADD PRIMARY KEY (`studentID`,`tourID`),
+  ADD KEY `tourID` (`tourID`);
 
 --
--- Chỉ mục cho bảng 'teacher'
+-- Chỉ mục cho bảng `teacher`
 --
-ALTER TABLE 'teacher'
-  ADD PRIMARY KEY ('teacherID'),
-  ADD KEY 'accountID' ('accountID');
+ALTER TABLE `teacher`
+  ADD PRIMARY KEY (`teacherID`),
+  ADD KEY `accountID` (`accountID`);
 
 --
--- Chỉ mục cho bảng 'tour'
+-- Chỉ mục cho bảng `tour`
 --
-ALTER TABLE 'tour'
-  ADD PRIMARY KEY ('tourID'),
-  ADD KEY 'teacherID' ('teacherID'),
-  ADD KEY 'companyID' ('companyID');
+ALTER TABLE `tour`
+  ADD PRIMARY KEY (`tourID`),
+  ADD KEY `teacherID` (`teacherID`),
+  ADD KEY `companyID` (`companyID`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT cho bảng 'account'
+-- AUTO_INCREMENT cho bảng `account`
 --
-ALTER TABLE 'account'
-  MODIFY 'accountID' int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+ALTER TABLE `account`
+  MODIFY `accountID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
--- AUTO_INCREMENT cho bảng 'class'
+-- AUTO_INCREMENT cho bảng `class`
 --
-ALTER TABLE 'class'
-  MODIFY 'classID' int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+ALTER TABLE `class`
+  MODIFY `classID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT cho bảng 'company'
+-- AUTO_INCREMENT cho bảng `company`
 --
-ALTER TABLE 'company'
-  MODIFY 'companyID' int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+ALTER TABLE `company`
+  MODIFY `companyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT cho bảng 'student'
+-- AUTO_INCREMENT cho bảng `student`
 --
-ALTER TABLE 'student'
-  MODIFY 'studentID' int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+ALTER TABLE `student`
+  MODIFY `studentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT cho bảng 'teacher'
+-- AUTO_INCREMENT cho bảng `teacher`
 --
-ALTER TABLE 'teacher'
-  MODIFY 'teacherID' int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+ALTER TABLE `teacher`
+  MODIFY `teacherID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT cho bảng 'tour'
+-- AUTO_INCREMENT cho bảng `tour`
 --
-ALTER TABLE 'tour'
-  MODIFY 'tourID' int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+ALTER TABLE `tour`
+  MODIFY `tourID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Các ràng buộc cho bảng 'student'
+-- Các ràng buộc cho bảng `student`
 --
-ALTER TABLE 'student'
-  ADD CONSTRAINT 'student_ibfk_1' FOREIGN KEY ('classID') REFERENCES 'class' ('classID') ON DELETE CASCADE,
-  ADD CONSTRAINT 'student_ibfk_2' FOREIGN KEY ('accountID') REFERENCES 'account' ('accountID') ON DELETE CASCADE;
+ALTER TABLE `student`
+  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`classID`) REFERENCES `class` (`classID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `student_ibfk_2` FOREIGN KEY (`accountID`) REFERENCES `account` (`accountID`) ON DELETE CASCADE;
 
 --
--- Các ràng buộc cho bảng 'student_tour'
+-- Các ràng buộc cho bảng `student_tour`
 --
-ALTER TABLE 'student_tour'
-  ADD CONSTRAINT 'student_tour_ibfk_1' FOREIGN KEY ('studentID') REFERENCES 'student' ('studentID') ON DELETE CASCADE,
-  ADD CONSTRAINT 'student_tour_ibfk_2' FOREIGN KEY ('tourID') REFERENCES 'tour' ('tourID') ON DELETE CASCADE;
+ALTER TABLE `student_tour`
+  ADD CONSTRAINT `student_tour_ibfk_1` FOREIGN KEY (`studentID`) REFERENCES `student` (`studentID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `student_tour_ibfk_2` FOREIGN KEY (`tourID`) REFERENCES `tour` (`tourID`) ON DELETE CASCADE;
 
 --
--- Các ràng buộc cho bảng 'teacher'
+-- Các ràng buộc cho bảng `teacher`
 --
-ALTER TABLE 'teacher'
-  ADD CONSTRAINT 'teacher_ibfk_1' FOREIGN KEY ('accountID') REFERENCES 'account' ('accountID') ON DELETE CASCADE;
+ALTER TABLE `teacher`
+  ADD CONSTRAINT `teacher_ibfk_1` FOREIGN KEY (`accountID`) REFERENCES `account` (`accountID`) ON DELETE CASCADE;
 
 --
--- Các ràng buộc cho bảng 'tour'
+-- Các ràng buộc cho bảng `tour`
 --
-ALTER TABLE 'tour'
-  ADD CONSTRAINT 'tour_ibfk_1' FOREIGN KEY ('teacherID') REFERENCES 'teacher' ('teacherID') ON DELETE CASCADE,
-  ADD CONSTRAINT 'tour_ibfk_2' FOREIGN KEY ('companyID') REFERENCES 'company' ('companyID') ON DELETE CASCADE;
+ALTER TABLE `tour`
+  ADD CONSTRAINT `tour_ibfk_1` FOREIGN KEY (`teacherID`) REFERENCES `teacher` (`teacherID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `tour_ibfk_2` FOREIGN KEY (`companyID`) REFERENCES `company` (`companyID`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
