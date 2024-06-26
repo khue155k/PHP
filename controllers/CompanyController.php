@@ -50,13 +50,11 @@
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['createCompany'])) {
         $code = $_POST["code"];
-        $fullName = $_POST["fullName"];
-        $gender = $_POST["gender"];
-        $birthDate = $_POST["birthDate"];
-        $address = $_POST["address"];
-        $phoneNumber = $_POST["phoneNumber"];
+        $name = $_POST["name"];
+        $description = $_POST["description"];
         $email = $_POST["email"];
-        $classID = $_POST["classID"];
+        $phoneNumber = $_POST["phoneNumber"];
+        $address = $_POST["address"]; 
 
         $checkCompanySql = "SELECT * FROM company WHERE code = '$code'";
         $checkCompanyResult = mysqli_query($conn, $checkCompanySql);
@@ -68,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         });
                     </script>";
         } else {
-            $createCompanySql = "INSERT INTO company(code, fullName, gender, birthDate, address, phoneNumber, email, classID) VALUES('$code', '$fullName', '$gender', '$birthDate', '$address', '$phoneNumber', '$email', '$classID')";
+            $createCompanySql = "INSERT INTO company(code, name, description, address, phoneNumber, email) VALUES('$code', '$name', '$description', '$address', '$phoneNumber', '$email')";
             if (!mysqli_query($conn, $createCompanySql)) {
                 $errorMessage = mysqli_real_escape_string($conn, mysqli_error($conn));
                 echo "<script>
