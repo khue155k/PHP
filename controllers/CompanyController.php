@@ -1,76 +1,4 @@
-<!-- 
-    // require_once __DIR__ . '/../views/pages/company.php';
-//pagination
-$pagination = mysqli_query($conn, "SELECT COUNT(companyID) AS total FROM company");
-$row = mysqli_fetch_assoc($pagination);
-$total_records = $row['total'];
 
-$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-$limit = 8;
-$total_page = ceil($total_records / $limit);
-
-if ($current_page > $total_page) $current_page = $total_page;
-        else if ($current_page < 1) $current_page = 1;
-
-$start = ($current_page - 1) * $limit >=0 ? ($current_page - 1) * $limit : 0;
-
-// read
-$dataCompanysSql = "SELECT companyID, code, name, description, email, phoneNumber, address FROM company";
-$dataCompanys = mysqli_query($conn, $dataCompanysSql);
-
-// $dataClassSql = "SELECT classID,name FROM class";
-// $dataClass = mysqli_query($conn, $dataClassSql);
-// $dataSelect = "";
-// if (mysqli_num_rows($dataClass) > 0) {
-//     while ($row = mysqli_fetch_assoc($dataClass)) {
-//         $dataSelect .= "<option value=" . $row['classID'] . ">" . $row['name'] . "</option>";
-//     }
-// }
-$scriptShowData="";
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['showData'])) {
-        $companyID = $_POST["companyID"];
-
-        $dataCompanySql = "SELECT companyID, code, name, description, email, phoneNumber, address FROM company
-                           WHERE companyID = $companyID";
-        $dataCompany = mysqli_query($conn, $dataCompanySql);
-
-        // $dataCompanyTourSql = "SELECT tour.code, tour.name, tour.description, startDate, availables, company.name AS companyName, teacher.fullName AS teacherName, presentator FROM company_tour
-        //             LEFT JOIN tour on tour.tourID = company_tour.tourID 
-        //             INNER JOIN company on company.companyID = tour.companyID 
-        //             INNER JOIN teacher on teacher.teacherID = tour.teacherID
-        //             WHERE companyID = $companyID";
-        // $dataCompanyTour = mysqli_query($conn, $dataCompanyTourSql);
-        $scriptShowData = "
-            document.getElementById('listCompanys').hidden = true;
-            document.getElementById('showData').hidden = false;";
-    }
-}
-//read
-$dataClassesSql = "SELECT class.*, COUNT(student.studentID) AS numStudents
-                  FROM class
-                  LEFT JOIN student ON class.classID = student.classID
-                  GROUP BY class.classID";
-$dataClasses = mysqli_query($conn, $dataClassesSql);
-$scriptShowData="";
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['showData'])) {
-        $classIDShow = $_POST["classIDToShowStudents"];
-        echo "<script>console.log('". $classIDShow ."')</script>" ;
-        $dataClassSql = "SELECT class.*, COUNT(student.studentID) AS numStudents
-                  FROM class
-                  LEFT JOIN student ON class.classID = student.classID
-                  WHERE class.classID = $classIDShow
-                  GROUP BY class.classID";
-        $dataClass = mysqli_query($conn, $dataClassSql);    
-        $dataStudentSql = "SELECT code, fullName, gender, birthDate, address, phoneNumber, email
-                           FROM student
-                           WHERE classID = $classIDShow";
-        $dataStudents = mysqli_query($conn, $dataStudentSql);
-        $scriptShowData = "
-            document.getElementById('listClass').hidden = true;
-            document.getElementById('showData').hidden = false;";
-    }} -->
 
 
     <?php
@@ -106,9 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                       WHERE company.companyID = $companyIDShow
                       GROUP BY company.companyID";
             $dataCompany = mysqli_query($conn, $dataCompanySql);    
-            $dataTourSql = "SELECT code, name, description, startDate, presentator, availables
-                               FROM tour
+            $dataTourSql = "SELECT tour.code, name, description, startDate, presentator, availables, teacher.fullName
+                               FROM tour LEFT JOIN teacher ON tour.teacherID = teacher.teacherID
                                WHERE companyID = $companyIDShow";
+
             $dataTours = mysqli_query($conn, $dataTourSql);
             $scriptShowData = "
                 document.getElementById('listCompany').hidden = true;
@@ -134,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (mysqli_num_rows($checkCompanyResult) > 0) {
             echo "<script>
                         document.addEventListener('DOMContentLoaded', function() {
-                            document.getElementById('modalMessage').innerText = 'Mã sinh viên đã tồn tại';
+                            document.getElementById('modalMessage').innerText = 'Mã doanh nghiệp đã tồn tại';
                             $('#notificationModal').modal('show');
                         });
                     </script>";
@@ -144,14 +73,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $errorMessage = mysqli_real_escape_string($conn, mysqli_error($conn));
                 echo "<script>
                             document.addEventListener('DOMContentLoaded', function() {
-                                document.getElementById('modalMessage').innerText = 'Thêm sinh viên thất bại: $errorMessage';
+                                document.getElementById('modalMessage').innerText = 'Thêm doanh nghiệp thất bại: $errorMessage';
                                 $('#notificationModal').modal('show');
                             });
                           </script>";
             } else {
                 echo "<script>
                             document.addEventListener('DOMContentLoaded', function() {
-                                document.getElementById('modalMessage').innerText = 'Thêm sinh viên thành công';
+                                document.getElementById('modalMessage').innerText = 'Thêm doanh nghiệp thành công';
                                 $('#notificationModal').modal('show');
                                 setTimeout(function(){
                                     window.location.href = '/PHP_Nhom3/index.php?controller=CompanyController';
@@ -204,10 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST["deleteID"])) {
         $deleteId = $_POST["deleteID"];
         
-        // Truy vấn để kiểm tra số lượng sinh viên của lớp học 
-        // Truy vấn để kiểm tra số lượng tour của doanh nghiệp
-        // $getQualityStudent = "SELECT COUNT(studentID) AS numStudents FROM student WHERE classID = '$deleteId'";
-        // $dataAll = mysqli_query($conn, $getQualityStudent);
+       
         $getQualityCompany = "SELECT COUNT(tourID) AS numTours FROM tour WHERE companyID = '$deleteId'";
         $dataAll = mysqli_query($conn, $getQualityCompany);
         if ($dataAll) {
